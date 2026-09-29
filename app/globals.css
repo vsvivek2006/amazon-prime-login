@@ -1,0 +1,92 @@
+/* Amazon USA & Prime Video Root Design Tokens */
+:root {
+  --amzn-font: "Amazon Ember", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --amzn-bg: #ffffff;
+  --amzn-card-bg: #ffffff;
+  --amzn-card-border: #d5d9d9;
+  --amzn-card-radius: 8px;
+  --amzn-text-main: #0f1111;
+  --amzn-text-muted: #565959;
+  --amzn-link: #007185;
+  --amzn-link-hover: #c7511f;
+  
+  /* Primary Button (Amazon Yellow) */
+  --amzn-btn-yellow-bg: #ffd814;
+  --amzn-btn-yellow-border: #fcd200;
+  --amzn-btn-yellow-hover: #f7ca00;
+  --amzn-btn-yellow-active: #f0b800;
+  
+  /* Secondary Button (Amazon Light Gray) */
+  --amzn-btn-gray-bg: #ffffff;
+  --amzn-btn-gray-border: #d5d9d9;
+  --amzn-btn-gray-hover: #f7fafa;
+  --amzn-btn-gray-active: #edfdff;
+  
+  /* Input & Focus */
+  --amzn-input-border: #888c8c;
+  --amzn-input-focus-border: #e77600;
+  --amzn-input-focus-ring: #c8f3fa;
+  --amzn-input-radius: 3px;
+  
+  /* Error & Alerts */
+  --amzn-err-red: #c40000;
+  --amzn-err-bg: #ffffff;
+  --amzn-err-border: #c40000;
+  
+  /* Footer */
+  --amzn-footer-link: #0066c0;
+  --amzn-footer-text: #555555;
+  --amzn-footer-divider: #e7e7e7;
+}
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--amzn-font);
+  background-color: var(--amzn-bg);
+  color: var(--amzn-text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--amzn-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--amzn-link-hover);
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Links & Typography Utility */
+.amzn-link {
+  color: var(--amzn-link);
+  font-size: 13px;
+  line-height: 19px;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.15s ease;
+}
+
+.amzn-link:hover {
+  color: var(--amzn-link-hover);
+  text-decoration: underline;
+}
