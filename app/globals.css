@@ -53,8 +53,8 @@ body {
   width: 100%;
   min-height: 100%;
   font-family: var(--amzn-font);
-  background-color: var(--amzn-bg);
-  color: var(--amzn-text-main);
+  background-color: #00050d;
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

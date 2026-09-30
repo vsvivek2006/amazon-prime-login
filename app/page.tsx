@@ -1,203 +1,185 @@
 'use client';
 
-import React, { useState } from 'react';
-import AmazonLogo from '@/components/AmazonLogo';
-import PrimeVideoLogo from '@/components/PrimeVideoLogo';
-import AlertBanner from '@/components/AlertBanner';
-import StepEmail from '@/components/StepEmail';
-import StepPassword from '@/components/StepPassword';
-import KeepSignedInModal from '@/components/KeepSignedInModal';
-import Footer from '@/components/Footer';
-import ThemeSwitcher from '@/components/ThemeSwitcher';
-import '@/styles/amazon-auth.css';
+import React, { useState, useMemo } from 'react';
+import PrimeNavbar from '@/components/PrimeNavbar';
+import PrimeHero from '@/components/PrimeHero';
+import PrimeCategoryTabs from '@/components/PrimeCategoryTabs';
+import PrimeMovieRow from '@/components/PrimeMovieRow';
+import { MovieItem } from '@/components/PrimeMovieCard';
+import PrimeFeatures from '@/components/PrimeFeatures';
+import PrimeRentBanner from '@/components/PrimeRentBanner';
+import PrimeChannels from '@/components/PrimeChannels';
+import PrimeDevices from '@/components/PrimeDevices';
+import PrimeFaq from '@/components/PrimeFaq';
+import PrimeFooter from '@/components/PrimeFooter';
+import PrimeTrailerModal from '@/components/PrimeTrailerModal';
+import PrimeAuthModal from '@/components/PrimeAuthModal';
+import {
+  featuredOriginals,
+  top10Movies,
+  blockbusterMovies,
+  popularTvShows,
+} from '@/data/primeData';
+import '@/styles/prime-landing.css';
 
-export default function LoginPage() {
-  const [step, setStep] = useState<1 | 2>(1);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+export default function PrimeLandingPage() {
+  const [activeTab, setActiveTab] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedMovie, setSelectedMovie] = useState<MovieItem | null>(null);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'join'>('join');
 
-  // Step 1: Handle Continue
-  const handleContinue = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cleanEmail = email.trim();
-
-    if (!cleanEmail) {
-      setError('Enter your email or mobile phone number');
-      return;
-    }
-
-    if (cleanEmail.length < 3) {
-      setError('Please enter a valid email address or phone number');
-      return;
-    }
-
-    setError(null);
-    setStep(2);
+  // Open Auth Dialog
+  const handleOpenJoin = () => {
+    setAuthMode('join');
+    setIsAuthOpen(true);
   };
 
-  // Step 2: Handle Sign-In
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!password.trim()) {
-      setError('Enter your password');
-      return;
-    }
-
-    setError(null);
-    setIsLoggedIn(true);
+  const handleOpenSignIn = () => {
+    setAuthMode('signin');
+    setIsAuthOpen(true);
   };
 
-  // Reset to Step 1 to change email
-  const handleChangeEmail = () => {
-    setError(null);
-    setStep(1);
+  // Open Video Trailer Modal
+  const handlePlayMovie = (movie: MovieItem) => {
+    setSelectedMovie(movie);
+    setIsTrailerOpen(true);
   };
 
-  // Create Amazon Account click
-  const handleCreateAccount = () => {
-    alert('Create Account Flow: In the real app, this takes you to /ap/register. You can sign in with your email above.');
+  const handleHeroTrailer = () => {
+    setSelectedMovie(featuredOriginals[0]);
+    setIsTrailerOpen(true);
   };
 
-  // Get OTP click
-  const handleGetOtp = () => {
-    alert(`An OTP (One-Time Password) was sent to ${email}. Please enter the 6-digit code to continue.`);
+  // Filter movies based on search and category
+  const filterList = (list: MovieItem[]) => {
+    return list.filter((m) => {
+      const matchesSearch =
+        searchQuery === '' ||
+        m.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        m.genre.toLowerCase().includes(searchQuery.toLowerCase());
+
+      if (!matchesSearch) return false;
+
+      if (activeTab === 'All') return true;
+      if (activeTab === 'Amazon Originals') return m.category === 'Amazon Originals';
+      if (activeTab === 'Movies') return m.category === 'Movies';
+      if (activeTab === 'TV Shows') return m.category === 'TV Shows';
+      if (activeTab === 'Top 10') return m.category === 'Top 10';
+      if (activeTab === 'Action & Thriller') return m.genre.includes('Action') || m.genre.includes('Thriller');
+      if (activeTab === 'Drama & Romance') return m.genre.includes('Drama') || m.genre.includes('Romance');
+
+      return true;
+    });
   };
 
-  // Full reset
-  const handleReset = () => {
-    setStep(1);
-    setEmail('');
-    setPassword('');
-    setError(null);
-    setIsLoggedIn(false);
-  };
+  const filteredOriginals = useMemo(() => filterList(featuredOriginals), [searchQuery, activeTab]);
+  const filteredTop10 = useMemo(() => filterList(top10Movies), [searchQuery, activeTab]);
+  const filteredBlockbusters = useMemo(() => filterList(blockbusterMovies), [searchQuery, activeTab]);
+  const filteredTvShows = useMemo(() => filterList(popularTvShows), [searchQuery, activeTab]);
 
   return (
-    <div className={`amzn-page-wrapper ${isDarkMode ? 'dark' : ''}`}>
-      {/* Top Floating Controls */}
-      <ThemeSwitcher
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        onReset={handleReset}
+    <div className="pv-landing-root">
+      {/* Sticky Prime Video Navbar */}
+      <PrimeNavbar
+        onOpenSignIn={handleOpenSignIn}
+        onSearchChange={(q) => setSearchQuery(q)}
       />
 
-      <div className="amzn-content-area">
-        {/* Header with Amazon or Prime Video Logo */}
-        <header className="amzn-header">
-          <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleReset();
-            }}
-            className="amzn-logo-link"
-            title="Amazon Home"
-          >
-            {isDarkMode ? (
-              <PrimeVideoLogo />
-            ) : (
-              <AmazonLogo isDarkMode={isDarkMode} />
-            )}
-          </a>
-        </header>
+      {/* Hero Spotlight Section */}
+      <PrimeHero
+        onJoinPrime={handleOpenJoin}
+        onOpenTrailer={handleHeroTrailer}
+      />
 
-        {/* Top Alert Banner for Errors */}
-        {error && (
-          <div className="amzn-main-container">
-            <AlertBanner title="There was a problem" message={error} />
-          </div>
-        )}
+      {/* Category Filter Tabs */}
+      <PrimeCategoryTabs
+        activeTab={activeTab}
+        onTabChange={(tab) => setActiveTab(tab)}
+      />
 
-        {/* Successful Authentication State */}
-        {isLoggedIn ? (
-          <div className="amzn-main-container">
-            <div className={`amzn-auth-card ${isDarkMode ? 'dark' : ''}`}>
-              <h1 className="amzn-card-title">Welcome back!</h1>
-              <p style={{ fontSize: '14px', lineHeight: '1.6', marginBottom: '16px' }}>
-                You have successfully signed in to <strong>Amazon Prime USA</strong> as:
-              </p>
-              <div
-                style={{
-                  padding: '12px',
-                  background: isDarkMode ? '#1e2936' : '#f0f2f2',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  fontSize: '13px',
-                  marginBottom: '20px',
-                  wordBreak: 'break-all',
-                }}
-              >
-                {email}
-              </div>
+      {/* Main Content Showcase */}
+      <main id="main-content">
+        {/* Row 1: Featured Amazon Originals */}
+        <div id="amazon-originals">
+          <PrimeMovieRow
+            title="Featured Originals"
+            subtitle="Only on Prime Video"
+            movies={filteredOriginals}
+            onSelectMovie={handlePlayMovie}
+            onPlayMovie={handlePlayMovie}
+          />
+        </div>
 
-              <button
-                type="button"
-                className="amzn-btn-primary"
-                onClick={() =>
-                  alert('Redirecting to Prime Video USA catalog (The Boys, Rings of Power, Fallout)...')
-                }
-                style={{ marginBottom: '10px' }}
-              >
-                Go to Prime Video USA
-              </button>
+        {/* Row 2: Top 10 in Your Region */}
+        <div id="top-10">
+          <PrimeMovieRow
+            title="Top 10 in Your Region"
+            subtitle="Trending today"
+            movies={filteredTop10}
+            onSelectMovie={handlePlayMovie}
+            onPlayMovie={handlePlayMovie}
+          />
+        </div>
 
-              <button
-                type="button"
-                className="amzn-btn-secondary"
-                onClick={handleReset}
-              >
-                Sign out / Back to Login
-              </button>
-            </div>
-          </div>
-        ) : (
-          /* Multi-Step Authentication */
-          <main className="amzn-main-container">
-            {step === 1 ? (
-              <StepEmail
-                email={email}
-                setEmail={(val) => {
-                  setEmail(val);
-                  if (error) setError(null);
-                }}
-                onContinue={handleContinue}
-                error={error}
-                onCreateAccount={handleCreateAccount}
-                isDarkMode={isDarkMode}
-              />
-            ) : (
-              <StepPassword
-                email={email}
-                password={password}
-                setPassword={(val) => {
-                  setPassword(val);
-                  if (error) setError(null);
-                }}
-                onSignIn={handleSignIn}
-                onChangeEmail={handleChangeEmail}
-                error={error}
-                onOpenKeepSignedInDetails={() => setIsDetailsModalOpen(true)}
-                onGetOtp={handleGetOtp}
-                isDarkMode={isDarkMode}
-              />
-            )}
-          </main>
-        )}
+        {/* Value Proposition Feature Highlights (Watch Anywhere, Download & Go, Data Saver) */}
+        <PrimeFeatures />
 
-        {/* Keep Me Signed In Informational Dialog */}
-        <KeepSignedInModal
-          isOpen={isDetailsModalOpen}
-          onClose={() => setIsDetailsModalOpen(false)}
-        />
+        {/* Row 3: Blockbuster Movies */}
+        <div id="movies">
+          <PrimeMovieRow
+            title="Blockbuster Movies"
+            subtitle="Popular movies"
+            movies={filteredBlockbusters}
+            onSelectMovie={handlePlayMovie}
+            onPlayMovie={handlePlayMovie}
+          />
+        </div>
 
-        {/* Footer with Legal Links & Copyright */}
-        <Footer isDarkMode={isDarkMode} />
-      </div>
+        {/* Movie Rentals / Store Promotion Banner */}
+        <PrimeRentBanner onRentClick={handleOpenJoin} />
+
+        {/* Row 4: Popular TV Shows */}
+        <div id="tv-shows">
+          <PrimeMovieRow
+            title="Popular TV Shows"
+            subtitle="Bingeworthy series"
+            movies={filteredTvShows}
+            onSelectMovie={handlePlayMovie}
+            onPlayMovie={handlePlayMovie}
+          />
+        </div>
+
+        {/* Prime Video Channels Subscriptions */}
+        <div id="channels">
+          <PrimeChannels onSubscribeChannel={handleOpenJoin} />
+        </div>
+
+        {/* Supported Devices Section */}
+        <PrimeDevices />
+
+        {/* Frequently Asked Questions */}
+        <PrimeFaq />
+      </main>
+
+      {/* Footer */}
+      <PrimeFooter />
+
+      {/* Interactive Video Trailer Pop-up Player */}
+      <PrimeTrailerModal
+        movie={selectedMovie}
+        isOpen={isTrailerOpen}
+        onClose={() => setIsTrailerOpen(false)}
+        onJoinPrime={handleOpenJoin}
+      />
+
+      {/* Quick Authentication / Trial Dialog */}
+      <PrimeAuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        defaultMode={authMode}
+      />
     </div>
   );
 }

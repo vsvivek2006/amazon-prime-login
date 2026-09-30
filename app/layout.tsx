@@ -2,11 +2,21 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Amazon Sign-In',
+  title: 'Welcome to Prime Video | Watch Movies, TV Shows & Originals',
   description:
-    'Sign in to your Amazon Prime account in the USA to stream Prime Video, enjoy fast shipping on eligible items, and manage your membership benefits. Secure Amazon account sign-in portal.',
+    'Stream movies, TV shows, and Amazon Originals — all in one place. Enjoy The Boys, Fallout, The Rings of Power, Citadel, and blockbuster hits on smart TVs, mobile, and web.',
+  keywords: [
+    'Prime Video',
+    'Amazon Originals',
+    'The Boys',
+    'Fallout',
+    'The Rings of Power',
+    'Watch Movies Online',
+    'Stream TV Shows',
+    'Prime Video Channels',
+  ],
   icons: {
-    icon: 'https://www.amazon.com/favicon.ico',
+    icon: '/media/prime_official_1.png',
   },
 };
 
