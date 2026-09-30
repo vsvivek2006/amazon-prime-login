@@ -96,6 +96,7 @@ export default function PrimeMovieCard({ movie, onSelect, onPlay }: PrimeMovieCa
           title={isAdded ? 'In Watchlist' : 'Add to Watchlist'}
         >
           {isAdded ? <Check size={14} color="#00a8e1" /> : <Plus size={14} />}
+        </div>
       </div>
 
       <div className="pv-card-info">
