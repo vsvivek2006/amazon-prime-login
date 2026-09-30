@@ -133,21 +133,52 @@ export default function PrimeHero({
     return () => clearTimeout(timer);
   }, [currentSlideIndex, isPaused]);
 
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
   const goToSlide = (idx: number) => {
     setCurrentSlideIndex(idx);
     setProgressKey((k) => k + 1);
   };
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrevSlide = () => {
     setCurrentSlideIndex((prev) => (prev === 0 ? HERO_SLIDES.length - 1 : prev - 1));
     setProgressKey((k) => k + 1);
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNextSlide = () => {
     setCurrentSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     setProgressKey((k) => k + 1);
+  };
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handlePrevSlide();
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    handleNextSlide();
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (diff > 45) {
+      handleNextSlide();
+    } else if (diff < -45) {
+      handlePrevSlide();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   return (
@@ -156,6 +187,9 @@ export default function PrimeHero({
       id="hero"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
       aria-label="Featured Carousel"
     >
       {/* Semantic H1 for SEO & Screen Readers */}

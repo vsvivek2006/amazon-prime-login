@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Search, Grip, User, ShoppingBag } from 'lucide-react';
+import { Search, Grip, User, ShoppingBag, X } from 'lucide-react';
 
 interface PrimeNavbarProps {
   onOpenSignIn: () => void;
@@ -24,6 +24,18 @@ export default function PrimeNavbar({
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchVal, setSearchVal] = useState('');
   const searchRef = useRef<HTMLInputElement>(null);
+
+  // Lock body scroll when mobile menu drawer is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     if (propActiveTab) {
@@ -236,10 +248,33 @@ export default function PrimeNavbar({
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
         <div className="pv-mobile-drawer" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="pv-mobile-drawer__inner" onClick={e => e.stopPropagation()}>
+          <div className="pv-mobile-drawer__inner" onClick={(e) => e.stopPropagation()}>
+            <div className="pv-mobile-drawer__header">
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} title="Prime Video">
+                <img
+                  src="/media/prime-video-logo.png"
+                  alt="Prime Video"
+                  title="Prime Video Homepage"
+                  width={100}
+                  height={28}
+                  decoding="async"
+                  className="pv-logo-img"
+                />
+              </Link>
+              <button
+                type="button"
+                className="pv-mobile-close-btn"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close navigation menu"
+                title="Close menu"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
             <div className="pv-search-bar pv-mobile-search">
               <Search size={16} className="pv-search-bar__icon" />
               <input
@@ -250,23 +285,48 @@ export default function PrimeNavbar({
                 onChange={handleSearch}
               />
             </div>
-            {['Home','Free to me','Movies','TV shows','Sports','News','Live TV','Subscriptions','Store'].map(item => (
-              <Link
-                key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g,'-')}`}
-                className="pv-mobile-link"
+
+            <div className="pv-mobile-nav-list">
+              {['Home', 'Free to me', 'Movies', 'TV shows', 'Sports', 'News', 'Live TV', 'Subscriptions', 'Store'].map(
+                (item) => (
+                  <Link
+                    key={item}
+                    href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    className={`pv-mobile-link ${activeTab === item ? 'pv-mobile-link--active' : ''}`}
+                    onClick={() => {
+                      setLocalActiveTab(item);
+                      onTabChange?.(item);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    {item}
+                  </Link>
+                )
+              )}
+            </div>
+
+            <div className="pv-mobile-drawer__footer">
+              <button
+                type="button"
+                className="pv-join-btn pv-join-btn--full"
                 onClick={() => {
-                  setLocalActiveTab(item);
-                  onTabChange?.(item);
                   setIsMobileMenuOpen(false);
+                  onOpenSignIn();
                 }}
               >
-                {item}
-              </Link>
-            ))}
-            <button type="button" className="pv-join-btn pv-join-btn--full" onClick={() => { setIsMobileMenuOpen(false); onOpenSignIn(); }}>
-              Join Prime – Start Free Trial
-            </button>
+                Join Prime – Start Free Trial
+              </button>
+              <button
+                type="button"
+                className="pv-mobile-signin-btn"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onOpenSignIn();
+                }}
+              >
+                Already a member? Sign In
+              </button>
+            </div>
           </div>
         </div>
       )}
