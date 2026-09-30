@@ -98,17 +98,6 @@ export default function PrimeMovieCard({ movie, onSelect, onPlay }: PrimeMovieCa
           {isAdded ? <Check size={14} color="#00a8e1" /> : <Plus size={14} />}
         </div>
       </div>
-
-      <div className="pv-card-info">
-        <h3 className="pv-card-title">{movie.title}</h3>
-        <div className="pv-card-submeta">
-          <span className="pv-card-prime-tag">Prime</span>
-          <span>•</span>
-          <span>{movie.match}</span>
-          <span>•</span>
-          <span>{movie.rating}</span>
-        </div>
-      </div>
     </div>
   );
 }

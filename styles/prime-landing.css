@@ -538,7 +538,7 @@
 
 /* ---------------- Movie Card ---------------- */
 .pv-card {
-  flex: 0 0 220px;
+  flex: 0 0 280px;
   position: relative;
   border-radius: var(--pv-radius-md);
   cursor: pointer;
@@ -546,10 +546,22 @@
   user-select: none;
 }
 
+@media (max-width: 768px) {
+  .pv-card {
+    flex: 0 0 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pv-card {
+    flex: 0 0 180px;
+  }
+}
+
 .pv-card-poster-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 16 / 9;
   border-radius: var(--pv-radius-md);
   overflow: hidden;
   background-color: var(--pv-surface);
@@ -657,6 +669,18 @@
   gap: 24px;
 }
 
+@media (max-width: 1024px) {
+  .pv-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pv-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .pv-feature-card {
   background: rgba(18, 28, 44, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -716,6 +740,14 @@
   align-items: center;
 }
 
+@media (max-width: 900px) {
+  .pv-channels-banner {
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+    text-align: center;
+  }
+}
+
 .pv-channels-content h2 {
   font-size: 36px;
   font-weight: 800;
@@ -733,6 +765,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .pv-channels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 400px) {
+  .pv-channels-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pv-channel-item {
@@ -782,6 +826,18 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .pv-devices-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pv-devices-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pv-device-box {

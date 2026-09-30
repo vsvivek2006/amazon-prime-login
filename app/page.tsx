@@ -15,10 +15,10 @@ import PrimeFooter from '@/components/PrimeFooter';
 import PrimeTrailerModal from '@/components/PrimeTrailerModal';
 import PrimeAuthModal from '@/components/PrimeAuthModal';
 import {
+  recentlyAdded,
+  asianDramas,
+  crimeThrillers,
   featuredOriginals,
-  top10Movies,
-  blockbusterMovies,
-  popularTvShows,
 } from '@/data/primeData';
 import '@/styles/prime-landing.css';
 
@@ -74,10 +74,10 @@ export default function PrimeLandingPage() {
     });
   };
 
+  const filteredRecentlyAdded = useMemo(() => filterList(recentlyAdded), [searchQuery, activeTab]);
+  const filteredAsianDramas = useMemo(() => filterList(asianDramas), [searchQuery, activeTab]);
+  const filteredCrimeThrillers = useMemo(() => filterList(crimeThrillers), [searchQuery, activeTab]);
   const filteredOriginals = useMemo(() => filterList(featuredOriginals), [searchQuery, activeTab]);
-  const filteredTop10 = useMemo(() => filterList(top10Movies), [searchQuery, activeTab]);
-  const filteredBlockbusters = useMemo(() => filterList(blockbusterMovies), [searchQuery, activeTab]);
-  const filteredTvShows = useMemo(() => filterList(popularTvShows), [searchQuery, activeTab]);
 
   return (
     <div className="pv-landing-root">
@@ -101,23 +101,21 @@ export default function PrimeLandingPage() {
 
       {/* Main Content Showcase */}
       <main id="main-content">
-        {/* Row 1: Featured Amazon Originals */}
-        <div id="amazon-originals">
+        {/* Row 1: Recently Added */}
+        <div id="recently-added">
           <PrimeMovieRow
-            title="Featured Originals"
-            subtitle="Only on Prime Video"
-            movies={filteredOriginals}
+            title="Recently added: Watch for Free"
+            movies={filteredRecentlyAdded}
             onSelectMovie={handlePlayMovie}
             onPlayMovie={handlePlayMovie}
           />
         </div>
 
-        {/* Row 2: Top 10 in Your Region */}
-        <div id="top-10">
+        {/* Row 2: Asian Dramas */}
+        <div id="asian-dramas">
           <PrimeMovieRow
-            title="Top 10 in Your Region"
-            subtitle="Trending today"
-            movies={filteredTop10}
+            title="Popular Asian dramas: Watch for Free"
+            movies={filteredAsianDramas}
             onSelectMovie={handlePlayMovie}
             onPlayMovie={handlePlayMovie}
           />
@@ -126,12 +124,11 @@ export default function PrimeLandingPage() {
         {/* Value Proposition Feature Highlights (Watch Anywhere, Download & Go, Data Saver) */}
         <PrimeFeatures />
 
-        {/* Row 3: Blockbuster Movies */}
-        <div id="movies">
+        {/* Row 3: Crime Thrillers */}
+        <div id="crime-thrillers">
           <PrimeMovieRow
-            title="Blockbuster Movies"
-            subtitle="Popular movies"
-            movies={filteredBlockbusters}
+            title="Crime Thrillers: Watch for Free"
+            movies={filteredCrimeThrillers}
             onSelectMovie={handlePlayMovie}
             onPlayMovie={handlePlayMovie}
           />
@@ -140,12 +137,11 @@ export default function PrimeLandingPage() {
         {/* Movie Rentals / Store Promotion Banner */}
         <PrimeRentBanner onRentClick={handleOpenJoin} />
 
-        {/* Row 4: Popular TV Shows */}
-        <div id="tv-shows">
+        {/* Row 4: Featured Originals */}
+        <div id="featured-originals">
           <PrimeMovieRow
-            title="Popular TV Shows"
-            subtitle="Bingeworthy series"
-            movies={filteredTvShows}
+            title="Featured Originals: Movies"
+            movies={filteredOriginals}
             onSelectMovie={handlePlayMovie}
             onPlayMovie={handlePlayMovie}
           />
