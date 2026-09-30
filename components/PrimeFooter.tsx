@@ -8,41 +8,57 @@ export default function PrimeFooter() {
     <footer className="pv-footer">
       <div className="pv-container">
         <div className="pv-footer-logo-wrap">
-          <Link href="/">
+          <Link href="/" title="Prime Video Home">
             <img
-              src="/media/prime_official_1.png"
+              src="/media/prime-video-logo.png"
               alt="Prime Video"
+              title="Prime Video Official Logo"
               className="pv-footer-logo"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/assets/prime-video-logo.svg';
-              }}
+              width={110}
+              height={32}
+              decoding="async"
             />
           </Link>
         </div>
 
-        <ul className="pv-footer-links">
+        <ul className="pv-footer-links" aria-label="Footer links">
           <li>
-            <a href="https://www.primevideo.com/help/ref=atv_ftr_terms" target="_blank" rel="noreferrer" className="pv-footer-link">
+            <a
+              href="https://www.primevideo.com/help/ref=atv_ftr_terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pv-footer-link"
+            >
               Terms and Privacy Notice
             </a>
           </li>
           <li>
-            <a href="https://www.primevideo.com/feedback" target="_blank" rel="noreferrer" className="pv-footer-link">
+            <a
+              href="https://www.primevideo.com/feedback"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pv-footer-link"
+            >
               Send us feedback
             </a>
           </li>
           <li>
-            <a href="https://www.primevideo.com/help" target="_blank" rel="noreferrer" className="pv-footer-link">
+            <a
+              href="https://www.primevideo.com/help"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pv-footer-link"
+            >
               Help
             </a>
           </li>
           <li>
-            <Link href="/login" className="pv-footer-link">
-              Sign In
-            </Link>
-          </li>
-          <li>
-            <a href="#cookies" className="pv-footer-link">
+            <a
+              href="https://www.primevideo.com/help?nodeId=202064890"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pv-footer-link"
+            >
               Cookie Preferences
             </a>
           </li>

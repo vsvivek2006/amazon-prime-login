@@ -1,257 +1,275 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Search, ChevronDown, Menu, X, Globe } from 'lucide-react';
+import { Search, Grip, User, ShoppingBag } from 'lucide-react';
 
 interface PrimeNavbarProps {
   onOpenSignIn: () => void;
   onSearchChange?: (query: string) => void;
+  activeTab?: string;
+  onTabChange?: (tab: string) => void;
 }
 
-export default function PrimeNavbar({ onOpenSignIn, onSearchChange }: PrimeNavbarProps) {
+export default function PrimeNavbar({
+  onOpenSignIn,
+  onSearchChange,
+  activeTab: propActiveTab,
+  onTabChange,
+}: PrimeNavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [localActiveTab, setLocalActiveTab] = useState(propActiveTab || 'Home');
+  const activeTab = propActiveTab || localActiveTab;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('EN');
+  const [searchOpen, setSearchOpen] = useState(false);
   const [searchVal, setSearchVal] = useState('');
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (propActiveTab) {
+      setLocalActiveTab(propActiveTab);
+    }
+  }, [propActiveTab]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 35);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (searchOpen && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [searchOpen]);
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchVal(e.target.value);
-    if (onSearchChange) {
-      onSearchChange(e.target.value);
-    }
+    onSearchChange?.(e.target.value);
   };
 
-  const categories = [
-    'Action & Adventure',
-    'Anime',
-    'Comedy',
-    'Documentary',
-    'Drama',
-    'Fantasy & Sci-Fi',
-    'Horror & Mystery',
-    'Kids & Family',
-    'Romance',
-    'Thriller',
-  ];
-
   return (
-    <header className={`pv-navbar ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="pv-nav-left">
-        {/* Prime Video Logo */}
+    <>
+      <header className={`pv-navbar${isScrolled ? ' pv-navbar--scrolled' : ''}`}>
+        {/* Logo */}
         <Link href="/" className="pv-logo-link" title="Prime Video">
           <img
-            src="/media/prime_official_1.png"
+            src="/media/prime-video-logo.png"
             alt="Prime Video"
+            title="Prime Video Homepage"
+            width={112}
+            height={32}
+            decoding="async"
             className="pv-logo-img"
-            onError={(e) => {
-              // fallback to svg logo if needed
-              (e.target as HTMLImageElement).src = '/assets/prime-video-logo.svg';
-            }}
           />
         </Link>
 
-        {/* Desktop Menu */}
-        <nav>
-          <ul className="pv-nav-menu">
-            <li className="pv-nav-item">
-              <Link href="/" className="pv-nav-link active">
-                Home
+        {/* Center Nav Links */}
+        <nav className="pv-nav-links" aria-label="Main navigation">
+          <Link
+            href="/"
+            className={`pv-nav-link ${activeTab === 'Home' ? 'pv-nav-link--active' : ''}`}
+            onClick={() => {
+              setLocalActiveTab('Home');
+              onTabChange?.('Home');
+            }}
+          >
+            {activeTab === 'Home' ? <span className="pv-nav-pill">Home</span> : 'Home'}
+          </Link>
+          {['Free to me', 'Movies', 'TV shows', 'Sports', 'News', 'Live TV'].map((item) => {
+            const path = `/${item.toLowerCase().replace(/\s+/g, '-')}`;
+            return (
+              <Link
+                key={item}
+                href={path}
+                className={`pv-nav-link ${activeTab === item ? 'pv-nav-link--active' : ''}`}
+                onClick={() => {
+                  setLocalActiveTab(item);
+                  onTabChange?.(item);
+                }}
+              >
+                {activeTab === item ? <span className="pv-nav-pill">{item}</span> : item}
               </Link>
-            </li>
-            <li className="pv-nav-item">
-              <a href="#free-to-me" className="pv-nav-link">
-                Free to me
-              </a>
-            </li>
-            <li className="pv-nav-item">
-              <a href="#movies" className="pv-nav-link">
-                Movies
-              </a>
-            </li>
-            <li className="pv-nav-item">
-              <a href="#tv-shows" className="pv-nav-link">
-                TV shows
-              </a>
-            </li>
-            <li className="pv-nav-item">
-              <a href="#live-tv" className="pv-nav-link">
-                Live TV
-              </a>
-            </li>
-            <li className="pv-nav-item">
-              <a href="#subscriptions" className="pv-nav-link">
+            );
+          })}
+          <span className="pv-nav-divider" aria-hidden="true">|</span>
+          <Link
+            href="/subscriptions"
+            className={`pv-nav-link pv-nav-link--icon ${activeTab === 'Subscriptions' ? 'pv-nav-link--active' : ''}`}
+            onClick={() => {
+              setLocalActiveTab('Subscriptions');
+              onTabChange?.('Subscriptions');
+            }}
+          >
+            {activeTab === 'Subscriptions' ? (
+              <span className="pv-nav-pill pv-nav-pill--icon">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <rect x="0" y="0" width="7" height="7" rx="1.5" />
+                  <rect x="9" y="0" width="7" height="7" rx="1.5" />
+                  <rect x="0" y="9" width="7" height="7" rx="1.5" />
+                  <rect x="9" y="9" width="7" height="7" rx="1.5" />
+                </svg>
                 Subscriptions
-              </a>
-            </li>
-          </ul>
+              </span>
+            ) : (
+              <>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <rect x="0" y="0" width="7" height="7" rx="1.5" />
+                  <rect x="9" y="0" width="7" height="7" rx="1.5" />
+                  <rect x="0" y="9" width="7" height="7" rx="1.5" />
+                  <rect x="9" y="9" width="7" height="7" rx="1.5" />
+                </svg>
+                Subscriptions
+              </>
+            )}
+          </Link>
+          <Link
+            href="/store"
+            className={`pv-nav-link pv-nav-link--icon ${activeTab === 'Store' ? 'pv-nav-link--active' : ''}`}
+            onClick={() => {
+              setLocalActiveTab('Store');
+              onTabChange?.('Store');
+            }}
+          >
+            {activeTab === 'Store' ? (
+              <span className="pv-nav-pill pv-nav-pill--icon">
+                <ShoppingBag size={14} strokeWidth={2} />
+                Store
+              </span>
+            ) : (
+              <>
+                <ShoppingBag size={14} strokeWidth={2} />
+                Store
+              </>
+            )}
+          </Link>
         </nav>
-      </div>
 
-      <div className="pv-nav-right">
-        {/* Search Input */}
-        <div className="pv-search-box">
-          <Search size={16} className="pv-search-icon" />
-          <input
-            type="text"
-            className="pv-search-input"
-            placeholder="Search titles..."
-            value={searchVal}
-            onChange={handleSearch}
-          />
-        </div>
+        {/* Right side actions */}
+        <div className="pv-nav-actions">
+          {/* Smooth Expanding Search Bar */}
+          <div className={`pv-search-container ${searchOpen ? 'pv-search-container--open' : ''}`}>
+            <button
+              type="button"
+              className="pv-icon-btn pv-search-icon-btn"
+              aria-label="Search"
+              title="Search Prime Video"
+              onClick={() => setSearchOpen(!searchOpen)}
+            >
+              <Search size={18} strokeWidth={2} />
+            </button>
+            <div className="pv-search-input-wrap">
+              <input
+                ref={searchRef}
+                type="text"
+                className="pv-search-input"
+                placeholder="Search Prime Video"
+                aria-label="Search Prime Video"
+                value={searchVal}
+                onChange={handleSearch}
+                onBlur={() => {
+                  if (!searchVal) setSearchOpen(false);
+                }}
+              />
+            </div>
+          </div>
 
-        {/* Language Selector */}
-        <div className="pv-nav-item" onMouseLeave={() => setIsLanguageOpen(false)}>
+          {/* Language Selector EN matching live primevideo.com */}
+          <button type="button" className="pv-lang-btn" aria-label="Language: English" title="Language: English">
+            <span>EN</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {/* 9-dot Grid / Categories */}
+          <button type="button" className="pv-icon-btn pv-grid-btn" aria-label="All Categories" title="Categories">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="currentColor">
+              <circle cx="3" cy="3" r="1.6" />
+              <circle cx="9" cy="3" r="1.6" />
+              <circle cx="15" cy="3" r="1.6" />
+              <circle cx="3" cy="9" r="1.6" />
+              <circle cx="9" cy="9" r="1.6" />
+              <circle cx="15" cy="9" r="1.6" />
+              <circle cx="3" cy="15" r="1.6" />
+              <circle cx="9" cy="15" r="1.6" />
+              <circle cx="15" cy="15" r="1.6" />
+            </svg>
+          </button>
+
+          {/* User Avatar */}
           <button
             type="button"
-            className="pv-nav-link"
-            style={{ fontSize: '13px' }}
-            onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+            className="pv-avatar-btn"
+            aria-label="Account & Sign In"
+            onClick={onOpenSignIn}
+            title="Account & Sign In"
           >
-            <Globe size={15} />
-            {currentLang}
-            <ChevronDown size={12} />
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+            </svg>
           </button>
-          {isLanguageOpen && (
-            <div className="pv-dropdown-menu" style={{ minWidth: '130px', right: 0, left: 'auto' }}>
-              {['EN (English)', 'HI (हिंदी)', 'ES (Español)', 'FR (Français)', 'DE (Deutsch)'].map((l) => (
-                <button
-                  key={l}
-                  type="button"
-                  className="pv-dropdown-item"
-                  style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none' }}
-                  onClick={() => {
-                    setCurrentLang(l.substring(0, 2));
-                    setIsLanguageOpen(false);
-                  }}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-          )}
+
+          {/* Join Prime button */}
+          <button
+            type="button"
+            className="pv-join-btn"
+            onClick={onOpenSignIn}
+            title="Join Prime – Start your 30-day free trial"
+          >
+            Join Prime
+          </button>
+
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            className="pv-mobile-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
+            title="Toggle navigation menu"
+          >
+            <span /><span /><span />
+          </button>
         </div>
-
-        {/* Sign In Button */}
-        <button type="button" className="pv-btn-signin" onClick={onOpenSignIn}>
-          Sign In
-        </button>
-
-        {/* Join Prime CTA */}
-        <button type="button" className="pv-btn-join" onClick={onOpenSignIn}>
-          Join Prime
-        </button>
-
-        {/* Mobile Toggle Button */}
-        <button
-          type="button"
-          className="pv-mobile-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Navigation"
-        >
-          {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </div>
+      </header>
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: '72px',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 5, 13, 0.98)',
-            backdropFilter: 'blur(20px)',
-            zIndex: 999,
-            padding: '24px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            overflowY: 'auto',
-          }}
-        >
-          <div className="pv-search-box" style={{ width: '100%' }}>
-            <Search size={16} className="pv-search-icon" />
-            <input
-              type="text"
-              className="pv-search-input"
-              style={{ width: '100%' }}
-              placeholder="Search movies, TV shows..."
-              value={searchVal}
-              onChange={handleSearch}
-            />
-          </div>
-          <Link
-            href="/"
-            className="pv-nav-link"
-            style={{ fontSize: '18px', padding: '12px 0' }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <a
-            href="#movies"
-            className="pv-nav-link"
-            style={{ fontSize: '18px', padding: '12px 0' }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Movies
-          </a>
-          <a
-            href="#tv-shows"
-            className="pv-nav-link"
-            style={{ fontSize: '18px', padding: '12px 0' }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            TV Shows
-          </a>
-          <a
-            href="#channels"
-            className="pv-nav-link"
-            style={{ fontSize: '18px', padding: '12px 0' }}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Channels & Subscriptions
-          </a>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <button
-              type="button"
-              className="pv-btn-join"
-              style={{ width: '100%', justifyContent: 'center', padding: '14px' }}
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenSignIn();
-              }}
-            >
-              Join Prime - Free Trial
-            </button>
-            <button
-              type="button"
-              className="pv-btn-signin"
-              style={{ width: '100%', textAlign: 'center', padding: '12px' }}
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onOpenSignIn();
-              }}
-            >
-              Sign In to Your Account
+        <div className="pv-mobile-drawer" onClick={() => setIsMobileMenuOpen(false)}>
+          <div className="pv-mobile-drawer__inner" onClick={e => e.stopPropagation()}>
+            <div className="pv-search-bar pv-mobile-search">
+              <Search size={16} className="pv-search-bar__icon" />
+              <input
+                type="text"
+                className="pv-search-bar__input"
+                placeholder="Search Prime Video"
+                value={searchVal}
+                onChange={handleSearch}
+              />
+            </div>
+            {['Home','Free to me','Movies','TV shows','Sports','News','Live TV','Subscriptions','Store'].map(item => (
+              <Link
+                key={item}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g,'-')}`}
+                className="pv-mobile-link"
+                onClick={() => {
+                  setLocalActiveTab(item);
+                  onTabChange?.(item);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                {item}
+              </Link>
+            ))}
+            <button type="button" className="pv-join-btn pv-join-btn--full" onClick={() => { setIsMobileMenuOpen(false); onOpenSignIn(); }}>
+              Join Prime – Start Free Trial
             </button>
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

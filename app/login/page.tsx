@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import AmazonLogo from '@/components/AmazonLogo';
 import PrimeVideoLogo from '@/components/PrimeVideoLogo';
 import AlertBanner from '@/components/AlertBanner';
@@ -89,12 +90,8 @@ export default function LoginPage() {
       <div className="amzn-content-area">
         {/* Header with Amazon or Prime Video Logo */}
         <header className="amzn-header">
-          <a
+          <Link
             href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleReset();
-            }}
             className="amzn-logo-link"
             title="Amazon Home"
           >
@@ -103,7 +100,7 @@ export default function LoginPage() {
             ) : (
               <AmazonLogo isDarkMode={isDarkMode} />
             )}
-          </a>
+          </Link>
         </header>
 
         {/* Top Alert Banner for Errors */}

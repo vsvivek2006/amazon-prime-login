@@ -66,12 +66,13 @@ export default function PrimeAuthModal({
         {/* Amazon Prime Logo */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
           <img
-            src="/media/prime_official_1.png"
+            src="/media/prime-video-logo.png"
             alt="Prime Video"
-            style={{ height: '36px', margin: '0 auto' }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = '/assets/prime-video-logo.svg';
-            }}
+            title="Prime Video Authentication"
+            width={124}
+            height={36}
+            decoding="async"
+            style={{ height: '36px', width: 'auto', margin: '0 auto' }}
           />
         </div>
 

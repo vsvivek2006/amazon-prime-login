@@ -1,0 +1,272 @@
+[
+  {
+    "index": 0,
+    "filename": "amazon-img-000.png",
+    "sizeKb": 21,
+    "alt": "(no alt)",
+    "width": 350,
+    "height": 450,
+    "src": "https://m.media-amazon.com/images/G/01/gno/sprites/nav-sprite-global-1x-reorg-privacy._CB779528203_.png"
+  },
+  {
+    "index": 1,
+    "filename": "amazon-img-001.png",
+    "sizeKb": 2,
+    "alt": "(no alt)",
+    "width": 320,
+    "height": 62,
+    "src": "https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png"
+  },
+  {
+    "index": 2,
+    "filename": "amazon-img-002.png",
+    "sizeKb": 2,
+    "alt": "(no alt)",
+    "width": 320,
+    "height": 62,
+    "src": "https://m.media-amazon.com/images/G/01/digital/video/web/logo-min-remaster.png"
+  },
+  {
+    "index": 3,
+    "filename": "amazon-img-003.jpg",
+    "sizeKb": 36,
+    "alt": "Prime member deals just for you",
+    "width": 2260,
+    "height": 847,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_TVOD_Casper_PMD_SH/4b96c169-57fe-4bdc-8643-f5527aa2ed73._UR3840,1440_SX2160_FMjpg_.jpeg"
+  },
+  {
+    "index": 4,
+    "filename": "amazon-img-004.png",
+    "sizeKb": 124,
+    "alt": "Casper",
+    "width": 502,
+    "height": 390,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_TVOD_Casper_PMD_SH/72274a27-f525-422d-a01e-0da3ec0d6e1b._BR-6_AC_SX1000_FMpng_.png"
+  },
+  {
+    "index": 5,
+    "filename": "amazon-img-005.jpg",
+    "sizeKb": 24,
+    "alt": "Backrooms",
+    "width": 2260,
+    "height": 847,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_3P_Backrooms_HBOMax_SH/6c380936-7021-488e-9752-463c28c379d1._UR3840,1440_SX2160_FMjpg_.jpeg"
+  },
+  {
+    "index": 6,
+    "filename": "amazon-img-006.png",
+    "sizeKb": 24,
+    "alt": "Backrooms",
+    "width": 1000,
+    "height": 153,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_3P_Backrooms_HBOMax_SH/fde6b0ee-d372-46c8-b594-9359a17103a2._BR-6_AC_SX1000_FMpng_.png"
+  },
+  {
+    "index": 7,
+    "filename": "amazon-img-007.jpg",
+    "sizeKb": 55,
+    "alt": "The Love Hypothesis",
+    "width": 2260,
+    "height": 847,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/PVIXA_SVOD_TheLoveHypothesis_Opti1/5d3456cd-bd1e-421e-9e6e-b1cf8d78b8c2._UR3840,1440_SX2160_FMjpg_.jpeg"
+  },
+  {
+    "index": 8,
+    "filename": "amazon-img-008.png",
+    "sizeKb": 29,
+    "alt": "The Love Hypothesis",
+    "width": 716,
+    "height": 400,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/PVIXA_SVOD_TheLoveHypothesis_Opti1/a002fbb3-4d1f-4ae2-bbf2-237a5a4e4b49._BR-6_AC_SX1000_FMpng_.png"
+  },
+  {
+    "index": 9,
+    "filename": "amazon-img-009.jpg",
+    "sizeKb": 21,
+    "alt": "(no alt)",
+    "width": 1506,
+    "height": 565,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_FAST_LawOrder_FR/67db5120-8b4b-4034-944d-df37cbc22885._SX2160_FMjpg_.jpeg"
+  },
+  {
+    "index": 10,
+    "filename": "amazon-img-010.png",
+    "sizeKb": 24,
+    "alt": "Law & Order",
+    "width": 499,
+    "height": 235,
+    "src": "https://m.media-amazon.com/images/G/01/LCXO_Station_Logos/law__order._SL500_FMpng_BR-6_AC_SX500_FMpng_.png"
+  },
+  {
+    "index": 11,
+    "filename": "amazon-img-011.jpg",
+    "sizeKb": 19,
+    "alt": "Livestream From Hell",
+    "width": 2260,
+    "height": 847,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_SVOD_Livestream_from_Hell/c3343c40-b378-4674-af6f-b1d95c6596f4._UR3840,1440_SX2160_FMjpg_.jpeg"
+  },
+  {
+    "index": 12,
+    "filename": "amazon-img-012.png",
+    "sizeKb": 51,
+    "alt": "Livestream From Hell",
+    "width": 488,
+    "height": 400,
+    "src": "https://m.media-amazon.com/images/S/sonata-images-prod/US_SVOD_Livestream_from_Hell/f8b2355e-39f2-4794-bcd9-eb295b27cd35._BR-6_AC_SX1000_FMpng_.png"
+  },
+  {
+    "index": 13,
+    "filename": "amazon-img-013.jpg",
+    "sizeKb": 129,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/611737c4d11a0ef533f4ebe87dbfef8d8ead77644313efdaa4dab85ec876398d._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 14,
+    "filename": "amazon-img-014.jpg",
+    "sizeKb": 112,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/3601d630d08ca56314fcc4a7a5548d4f5589d3b5154167936574dd02b4d31a1b._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 15,
+    "filename": "amazon-img-015.jpg",
+    "sizeKb": 96,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/68d9698d18c528edb7ebc0e86387391e961a92743566da867d7cdfa00e7c8663._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 16,
+    "filename": "amazon-img-016.jpg",
+    "sizeKb": 63,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/bfaf68a9b1f26de5c2ae7e6b132f48056b12392bf62d5e52a2251d6eca8eb390._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 17,
+    "filename": "amazon-img-017.png",
+    "sizeKb": 1083,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/b48eea04ea5b68a7a67e1a983a6f6de088d8e1eecda2e66ed1b2d66e677b56dc._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMpng_.png"
+  },
+  {
+    "index": 18,
+    "filename": "amazon-img-018.jpg",
+    "sizeKb": 76,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/13156f0fe24f9937954233e73fa590fc5e38dce1014bdea6e129c2142b200b58._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 19,
+    "filename": "amazon-img-019.png",
+    "sizeKb": 1025,
+    "alt": "(no alt)",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/33a83055d8f3773dc3ad9f4f2180bff71257dcd02cc1bdb18b4569e7f942bd15._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMpng_.png"
+  },
+  {
+    "index": 20,
+    "filename": "amazon-img-020.jpg",
+    "sizeKb": 83,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/ed55d7630e07c19c8057c0d85aed3413b29f9f8be5327dd5db9b02d3f8d8faf3._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 21,
+    "filename": "amazon-img-021.jpg",
+    "sizeKb": 86,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/414aa7abec4cc9cfbf954418bebe2c88fbfcf91fa3d65f9e8828950869498153._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 22,
+    "filename": "amazon-img-022.png",
+    "sizeKb": 676,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/c4e289d72aea2101954bc9a41e9f9ee017c3b61bf2c4f5b8405c6bba95aaaa61._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMpng_.png"
+  },
+  {
+    "index": 23,
+    "filename": "amazon-img-023.jpg",
+    "sizeKb": 185,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/af846d8f21fbeeadbf8ae20c0d3444c05e3dbbf0877faea1bae1973927c5b1e4._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 24,
+    "filename": "amazon-img-024.jpg",
+    "sizeKb": 92,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/50f630450cdea23fca42550f2d24e4ff1fd5ff18bb77c12e9a1b366c2fb95f04._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 25,
+    "filename": "amazon-img-025.jpg",
+    "sizeKb": 100,
+    "alt": "(no alt)",
+    "width": 276,
+    "height": 155,
+    "src": "https://m.media-amazon.com/images/S/pv-target-images/4df5b63d384488093bd51166423b7693217ed8cee51b72d7dfcbaf23d2f73752._UR1920,1080_CLs%7C1920,1080%7C/G/bundle/BottomRightCardGradient16x9.png,/G/01/digital/video/merch/subs/benefit-id/a-f/freewithads/logos/channels-logo-white.png%7C0,0,1920,1080+0,0,1920,1080+1578,847,263,156_kv053498f62d21803ffcbf28da234cfe9f_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 26,
+    "filename": "amazon-img-026.png",
+    "sizeKb": 40,
+    "alt": "Amanpour and Company",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/I/91LEONIVKbL._UR1920,1080_FMpng_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 27,
+    "filename": "amazon-img-027.png",
+    "sizeKb": 70,
+    "alt": "The Break Up",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/I/81rS-ch929L._UR1920,1080_FMpng_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 28,
+    "filename": "amazon-img-028.png",
+    "sizeKb": 54,
+    "alt": "Honoring Robert Morgenthau",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/I/91of1drXGqL._UR1920,1080_FMpng_SX624_FMjpg_.jpg"
+  },
+  {
+    "index": 29,
+    "filename": "amazon-img-029.png",
+    "sizeKb": 66,
+    "alt": "The Night Brianna Vanished",
+    "width": 624,
+    "height": 351,
+    "src": "https://m.media-amazon.com/images/I/B1C7ORKYEnL._UR1920,1080_FMpng_SX624_FMjpg_.jpg"
+  }
+]

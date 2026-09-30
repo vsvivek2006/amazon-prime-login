@@ -30,24 +30,20 @@ export default function AccordionHelp() {
           <ul className="amzn-help-links">
             <li>
               <a
-                href="#forgot-password"
+                href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GH7NM2YWEVR2FQBC"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="amzn-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert('Password assistance flow: Please check your registered email or phone.');
-                }}
               >
                 Forgot your password?
               </a>
             </li>
             <li>
               <a
-                href="#other-issues"
+                href="https://www.amazon.com/gp/help/customer/display.html?nodeId=G4D42UHQGE5HGDE7"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="amzn-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert('Customer Service & Account Support: 24/7 assistance available.');
-                }}
               >
                 Other issues with Sign-In
               </a>

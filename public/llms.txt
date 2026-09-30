@@ -1,0 +1,39 @@
+# Prime Video
+
+> Prime Video is Amazon's premier entertainment destination, offering thousands of popular movies, award-winning Amazon Originals, hit TV shows, live sports, and add-on channel subscriptions.
+
+## Overview
+Prime Video provides on-demand streaming in high definition (HD) and 4K Ultra HD with HDR (High Dynamic Range) and Dolby Atmos sound on compatible devices. Content includes included-with-Prime programming, premium subscriptions (Max, Paramount+, Starz), and rentals/purchases through the Prime Video Store.
+
+## Key Sections & Categories
+- **Home (`/`)**: Main hub displaying personalized rows, recently added blockbusters, and top 10 rankings.
+- **Movies (`/movies`)**: Full catalog of blockbuster films, Hollywood cinema, international hits, and indie features.
+- **TV Shows (`/tv-shows`)**: Complete seasons of acclaimed television drama, comedy, reality series, and documentaries.
+- **Free to Me (`/free-to-me`)**: Curated library of titles included directly with an active Prime membership at no additional cost.
+- **Live Sports (`/sports`)**: Live coverage of major athletic leagues, Thursday Night Football, tournaments, and exclusive events.
+- **News (`/news`)**: 24/7 streaming news broadcasts and live commentary networks.
+- **Live TV (`/live-tv`)**: Over 100+ free ad-supported streaming television (FAST) channels.
+- **Subscriptions (`/subscriptions`)**: Manage and subscribe to third-party channel partners including Paramount+, Max, MGM+, and Discovery+.
+- **Store (`/store`)**: Early-access digital rentals and electronic sell-through (EST) purchases for theatrical releases.
+
+## Prominent Amazon Originals
+- *The Boys* & *Gen V*
+- *Fallout*
+- *The Lord of the Rings: The Rings of Power*
+- *Reacher*
+- *Citadel*
+- *The Summer I Turned Pretty*
+- *Invincible*
+- *The Idea of You*
+- *Road House*
+
+## Access & Membership
+- **Prime Membership**: Includes Prime Video, fast free delivery, Amazon Music Prime, and Prime Reading.
+- **Standalone Prime Video**: Available as an individual video streaming membership.
+- **Free Trial**: 30-day trial available for eligible new subscribers.
+- **Supported Devices**: Smart TVs (Samsung, LG, Sony), streaming devices (Fire TV, Roku, Apple TV, Chromecast), mobile phones (iOS, Android), game consoles (PS5, Xbox Series X/S), and web browsers.
+
+## Technical Specifications
+- Canonical URL: https://www.primevideo.com
+- Robots: Allowed for all standard web crawlers and verified LLM bots
+- Sitemap: /sitemap.xml

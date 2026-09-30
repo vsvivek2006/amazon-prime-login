@@ -56,11 +56,12 @@ export default function PrimeTrailerModal({
 
         <video
           ref={videoRef}
-          src="/media/prime-trailer.mp4"
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
           autoPlay
           controls
+          playsInline
           className="pv-modal-video"
-          poster={movie?.image || '/media/hero-banner.jpg'}
+          poster={movie?.image || '/media/hero-love-hypothesis.jpg'}
         />
 
         <div className="pv-modal-details">

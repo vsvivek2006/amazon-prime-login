@@ -12,8 +12,10 @@ export default function AmazonLogo({ isDarkMode = false, className = '' }: Amazo
       <img
         src="/assets/amazon-logo.svg"
         alt="Amazon"
+        title="Amazon Logo"
         width="103"
         height="31"
+        decoding="async"
         className={`amzn-official-logo ${isDarkMode ? 'dark' : ''}`}
         style={{
           width: '103px',

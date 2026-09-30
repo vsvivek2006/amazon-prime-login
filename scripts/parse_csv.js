@@ -40,62 +40,70 @@ function parseCSV(csvText) {
 }
 
 try {
-  const csvContent = fs.readFileSync('amazon-com-2026-09-30_partial.csv', 'utf8');
-  const rows = parseCSV(csvContent);
-
-  const header = rows[0];
-  const nameIndices = [];
-  const imageIndices = [];
-  let categoryIndex = -1;
-
-  for (let i = 0; i < header.length; i++) {
-    const col = header[i].trim();
-    if (col === 'data') categoryIndex = i;
-    else if (col.startsWith('name')) nameIndices.push(i);
-    else if (col.startsWith('image')) imageIndices.push(i);
-  }
-
+  const files = ['amazon-com-2026-09-30.csv', 'amazon-com-2026-09-30_partial.csv'];
   const formattedData = [];
   let idCounter = 1;
+  const seenCategories = new Set();
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
-    if (row.length < categoryIndex || !row[categoryIndex]) continue;
+  for (const file of files) {
+    if (!fs.existsSync(file)) continue;
+    const csvContent = fs.readFileSync(file, 'utf8');
+    const rows = parseCSV(csvContent);
 
-    const categoryTitle = row[categoryIndex].trim();
-    if (!categoryTitle) continue;
+    const header = rows[0];
+    if(!header) continue;
+    
+    const nameIndices = [];
+    const imageIndices = [];
+    let categoryIndex = -1;
 
-    const movies = [];
-
-    // Assuming names and images are matched by index
-    for (let j = 0; j < nameIndices.length; j++) {
-      const nameIdx = nameIndices[j];
-      const imgIdx = imageIndices[j];
-
-      if (nameIdx !== undefined && imgIdx !== undefined && row[nameIdx] && row[imgIdx]) {
-        const title = row[nameIdx].trim();
-        const image = row[imgIdx].trim();
-
-        if (title && image) {
-          movies.push({
-            id: String(idCounter++),
-            title: title,
-            image: image,
-            category: categoryTitle,
-            genre: 'Various',
-            year: '2023',
-            rating: 'PG-13',
-            match: '95%'
-          });
-        }
-      }
+    for (let i = 0; i < header.length; i++) {
+      const col = header[i].trim();
+      if (col === 'data') categoryIndex = i;
+      else if (col.startsWith('name')) nameIndices.push(i);
+      else if (col.startsWith('image')) imageIndices.push(i);
     }
 
-    if (movies.length > 0) {
-      formattedData.push({
-        title: categoryTitle,
-        movies: movies
-      });
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (row.length < categoryIndex || !row[categoryIndex]) continue;
+
+      const categoryTitle = row[categoryIndex].trim();
+      if (!categoryTitle || seenCategories.has(categoryTitle)) continue;
+
+      const movies = [];
+
+      // Assuming names and images are matched by index
+      for (let j = 0; j < nameIndices.length; j++) {
+        const nameIdx = nameIndices[j];
+        const imgIdx = imageIndices[j];
+
+        if (nameIdx !== undefined && imgIdx !== undefined && row[nameIdx] && row[imgIdx]) {
+          const title = row[nameIdx].trim();
+          const image = row[imgIdx].trim();
+
+          if (title && image) {
+            movies.push({
+              id: String(idCounter++),
+              title: title,
+              image: image,
+              category: categoryTitle,
+              genre: 'Various',
+              year: '2023',
+              rating: 'PG-13',
+              match: '95%'
+            });
+          }
+        }
+      }
+
+      if (movies.length > 0) {
+        seenCategories.add(categoryTitle);
+        formattedData.push({
+          title: categoryTitle,
+          movies: movies
+        });
+      }
     }
   }
 

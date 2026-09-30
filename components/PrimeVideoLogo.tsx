@@ -10,8 +10,10 @@ export default function PrimeVideoLogo({ className = '' }: PrimeVideoLogoProps) 
       <img
         src="/assets/prime-video-logo.svg"
         alt="Prime Video"
+        title="Prime Video Logo"
         width="128"
         height="32"
+        decoding="async"
         className="prime-official-logo"
         style={{
           width: '128px',

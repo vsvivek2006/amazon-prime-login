@@ -51,12 +51,10 @@ export default function StepPassword({
               Password
             </label>
             <a
-              href="#forgot-password"
+              href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GH7NM2YWEVR2FQBC"
+              target="_blank"
+              rel="noopener noreferrer"
               className="amzn-link amzn-forgot-link"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('Password reset instructions have been sent to your registered contact.');
-              }}
             >
               Forgot password?
             </a>

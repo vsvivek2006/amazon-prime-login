@@ -47,6 +47,10 @@ export default function PrimeChannels({ onSubscribeChannel }: PrimeChannelsProps
                 <img
                   src={c.logo}
                   alt={c.name}
+                  title={`${c.name} on Prime Video`}
+                  width={120}
+                  height={40}
+                  decoding="async"
                   className="pv-channel-logo-img"
                   onError={(e) => {
                     // Fallback to text badge if needed

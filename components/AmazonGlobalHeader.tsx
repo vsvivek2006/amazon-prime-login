@@ -12,7 +12,16 @@ export default function AmazonGlobalHeader() {
       <div className="amz-top-row">
         <div className="amz-nav-left">
           <Link href="/" className="amz-logo-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="amz-logo" style={{ filter: 'brightness(0) invert(1)', height: '30px', marginTop: '8px' }} />
+            <img
+              src="/assets/amazon-logo.svg"
+              alt="Amazon"
+              title="Amazon Logo"
+              width={96}
+              height={30}
+              decoding="async"
+              className="amz-logo"
+              style={{ filter: 'brightness(0) invert(1)', height: '30px', width: 'auto', marginTop: '8px' }}
+            />
           </Link>
           <div className="amz-nav-deliver">
             <MapPin size={16} className="amz-pin-icon" />
@@ -71,11 +80,11 @@ export default function AmazonGlobalHeader() {
           <span>All</span>
         </div>
         <div className="amz-bottom-links">
-          <Link href="#">Today's Deals</Link>
-          <Link href="#">Customer Service</Link>
-          <Link href="#">Registry</Link>
-          <Link href="#">Gift Cards</Link>
-          <Link href="#">Sell</Link>
+          <a href="https://www.amazon.com/deals" target="_blank" rel="noopener noreferrer">Today&apos;s Deals</a>
+          <a href="https://www.amazon.com/gp/help/customer/display.html" target="_blank" rel="noopener noreferrer">Customer Service</a>
+          <a href="https://www.amazon.com/registries" target="_blank" rel="noopener noreferrer">Registry</a>
+          <a href="https://www.amazon.com/gift-cards" target="_blank" rel="noopener noreferrer">Gift Cards</a>
+          <a href="https://sell.amazon.com" target="_blank" rel="noopener noreferrer">Sell</a>
         </div>
       </div>
     </div>
