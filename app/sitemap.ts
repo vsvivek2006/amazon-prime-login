@@ -4,19 +4,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // In a real application, you would dynamically generate this based on your database or CMS
   return [
     {
-      url: 'https://www.yourdomain.com',
+      url: 'https://amzonprimelogin.com',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: 'https://www.yourdomain.com/movies',
+      url: 'https://amzonprimelogin.com/movies',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: 'https://www.yourdomain.com/tv-shows',
+      url: 'https://amzonprimelogin.com/tv-shows',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: 'https://www.yourdomain.com/sitemap.xml',
+    sitemap: 'https://amzonprimelogin.com/sitemap.xml',
   };
 }
