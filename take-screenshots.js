@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
   const context = await browser.newContext();
   const page = await context.newPage();
   
-  await page.goto('http://localhost:3000');
+  await page.goto('http://localhost:3001');
   
   // Wait for images to load
   await page.waitForTimeout(2000);

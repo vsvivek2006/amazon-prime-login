@@ -70,43 +70,29 @@ export default function PrimeNavbar({ onOpenSignIn, onSearchChange }: PrimeNavba
               </Link>
             </li>
             <li className="pv-nav-item">
+              <a href="#free-to-me" className="pv-nav-link">
+                Free to me
+              </a>
+            </li>
+            <li className="pv-nav-item">
               <a href="#movies" className="pv-nav-link">
                 Movies
               </a>
             </li>
             <li className="pv-nav-item">
               <a href="#tv-shows" className="pv-nav-link">
-                TV Shows
+                TV shows
               </a>
             </li>
             <li className="pv-nav-item">
-              <a href="#channels" className="pv-nav-link">
-                Subscriptions
+              <a href="#live-tv" className="pv-nav-link">
+                Live TV
               </a>
             </li>
-            <li className="pv-nav-item" onMouseLeave={() => setIsCategoryOpen(false)}>
-              <button
-                type="button"
-                className="pv-nav-link"
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                onMouseEnter={() => setIsCategoryOpen(true)}
-              >
-                Categories <ChevronDown size={14} />
-              </button>
-              {isCategoryOpen && (
-                <div className="pv-dropdown-menu">
-                  {categories.map((cat) => (
-                    <a
-                      key={cat}
-                      href={`#${cat.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                      className="pv-dropdown-item"
-                      onClick={() => setIsCategoryOpen(false)}
-                    >
-                      {cat}
-                    </a>
-                  ))}
-                </div>
-              )}
+            <li className="pv-nav-item">
+              <a href="#subscriptions" className="pv-nav-link">
+                Subscriptions
+              </a>
             </li>
           </ul>
         </nav>

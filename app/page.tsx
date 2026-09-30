@@ -20,6 +20,7 @@ import {
   crimeThrillers,
   featuredOriginals,
 } from '@/data/primeData';
+import scrapedData from '@/data/formattedScrapedData.json';
 import '@/styles/prime-landing.css';
 
 export default function PrimeLandingPage() {
@@ -29,6 +30,21 @@ export default function PrimeLandingPage() {
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'join'>('join');
+  const [visibleRows, setVisibleRows] = useState(3);
+
+  // Infinite Scroll Hook
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 300 >=
+        document.documentElement.scrollHeight
+      ) {
+        setVisibleRows((prev) => Math.min(prev + 2, scrapedData.length));
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Open Auth Dialog
   const handleOpenJoin = () => {
@@ -101,62 +117,38 @@ export default function PrimeLandingPage() {
 
       {/* Main Content Showcase */}
       <main id="main-content">
-        {/* Row 1: Recently Added */}
-        <div id="recently-added">
-          <PrimeMovieRow
-            title="Recently added: Watch for Free"
-            movies={filteredRecentlyAdded}
-            onSelectMovie={handlePlayMovie}
-            onPlayMovie={handlePlayMovie}
-          />
-        </div>
+        
+        {scrapedData.slice(0, visibleRows).map((row, index) => (
+          <React.Fragment key={index}>
+            <div id={`scraped-row-${index}`}>
+              <PrimeMovieRow
+                title={row.title}
+                movies={filterList(row.movies)}
+                onSelectMovie={handlePlayMovie}
+                onPlayMovie={handlePlayMovie}
+              />
+            </div>
+            
+            {/* Inject features or banners after certain rows to keep layout interesting */}
+            {index === 1 && <PrimeFeatures />}
+            {index === 3 && <PrimeRentBanner onRentClick={handleOpenJoin} />}
+            {index === 5 && (
+              <div id="channels">
+                <PrimeChannels onSubscribeChannel={handleOpenJoin} />
+              </div>
+            )}
+          </React.Fragment>
+        ))}
 
-        {/* Row 2: Asian Dramas */}
-        <div id="asian-dramas">
-          <PrimeMovieRow
-            title="Popular Asian dramas: Watch for Free"
-            movies={filteredAsianDramas}
-            onSelectMovie={handlePlayMovie}
-            onPlayMovie={handlePlayMovie}
-          />
-        </div>
+        {visibleRows >= scrapedData.length && (
+          <>
+            {/* Supported Devices Section */}
+            <PrimeDevices />
 
-        {/* Value Proposition Feature Highlights (Watch Anywhere, Download & Go, Data Saver) */}
-        <PrimeFeatures />
-
-        {/* Row 3: Crime Thrillers */}
-        <div id="crime-thrillers">
-          <PrimeMovieRow
-            title="Crime Thrillers: Watch for Free"
-            movies={filteredCrimeThrillers}
-            onSelectMovie={handlePlayMovie}
-            onPlayMovie={handlePlayMovie}
-          />
-        </div>
-
-        {/* Movie Rentals / Store Promotion Banner */}
-        <PrimeRentBanner onRentClick={handleOpenJoin} />
-
-        {/* Row 4: Featured Originals */}
-        <div id="featured-originals">
-          <PrimeMovieRow
-            title="Featured Originals: Movies"
-            movies={filteredOriginals}
-            onSelectMovie={handlePlayMovie}
-            onPlayMovie={handlePlayMovie}
-          />
-        </div>
-
-        {/* Prime Video Channels Subscriptions */}
-        <div id="channels">
-          <PrimeChannels onSubscribeChannel={handleOpenJoin} />
-        </div>
-
-        {/* Supported Devices Section */}
-        <PrimeDevices />
-
-        {/* Frequently Asked Questions */}
-        <PrimeFaq />
+            {/* Frequently Asked Questions */}
+            <PrimeFaq />
+          </>
+        )}
       </main>
 
       {/* Footer */}
