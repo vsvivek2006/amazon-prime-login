@@ -96,10 +96,26 @@ export default function PrimeHero({
   const [isPaused, setIsPaused] = useState(false);
   const [progressKey, setProgressKey] = useState(0);
   const [watchlistMap, setWatchlistMap] = useState<Record<string, boolean>>({});
+  const [loadedSlideIndices, setLoadedSlideIndices] = useState<number[]>([0]);
 
   const mainHeading =
     headingText ||
     'Welcome to Prime Video – Stream Movies, Watch TV Shows & Discover Amazon Originals';
+
+  // Only load active slide on mount to prevent downloading all hero backdrops at once.
+  // Preload upcoming slide 1.2s before transition to ensure seamless playback without initial bundle bloat.
+  useEffect(() => {
+    setLoadedSlideIndices((prev) => (prev.includes(currentSlideIndex) ? prev : [...prev, currentSlideIndex]));
+
+    if (isPaused) return;
+
+    const preloadTimer = setTimeout(() => {
+      const nextIdx = (currentSlideIndex + 1) % HERO_SLIDES.length;
+      setLoadedSlideIndices((prev) => (prev.includes(nextIdx) ? prev : [...prev, nextIdx]));
+    }, Math.max(0, SLIDE_DURATION_MS - 1200));
+
+    return () => clearTimeout(preloadTimer);
+  }, [currentSlideIndex, isPaused]);
 
   const toggleWatchlist = (slideId: string) => {
     setWatchlistMap((prev) => ({ ...prev, [slideId]: !prev[slideId] }));
@@ -155,6 +171,7 @@ export default function PrimeHero({
         {HERO_SLIDES.map((slide, idx) => {
           const isActive = idx === currentSlideIndex;
           const isAdded = Boolean(watchlistMap[slide.id]);
+          const shouldLoad = loadedSlideIndices.includes(idx);
 
           return (
             <article
@@ -168,16 +185,23 @@ export default function PrimeHero({
 
               {/* Slide Backdrop with Ken-Burns Motion */}
               <div className="pv-hero__backdrop-wrap">
-                <img
-                  src={slide.backdrop}
-                  alt={`${slide.title} Poster`}
-                  title={`${slide.title} – Watch on Prime Video`}
-                  width={1920}
-                  height={800}
-                  decoding="async"
-                  fetchPriority={idx === 0 ? 'high' : 'low'}
-                  className="pv-hero__poster"
-                />
+                {shouldLoad ? (
+                  <img
+                    src={slide.backdrop}
+                    alt={`${slide.title} Poster`}
+                    title={`${slide.title} – Watch on Prime Video`}
+                    width={1920}
+                    height={800}
+                    decoding="async"
+                    fetchPriority={idx === 0 ? 'high' : 'low'}
+                    className="pv-hero__poster"
+                  />
+                ) : (
+                  <div
+                    className="pv-hero__poster"
+                    style={{ backgroundColor: '#00050d', width: '100%', height: '100%' }}
+                  />
+                )}
               </div>
 
               {/* Cinematic Dark Gradient Overlays */}
@@ -189,15 +213,19 @@ export default function PrimeHero({
               <div className="pv-hero__content">
                 {/* Title Logo Artwork */}
                 <div className="pv-hero__title-wrap pv-hero__anim-item" style={{ animationDelay: '0.04s' }}>
-                  <img
-                    src={slide.logoImg}
-                    alt={`${slide.title} Logo`}
-                    title={`${slide.title} Official Title Logo`}
-                    width={360}
-                    height={120}
-                    decoding="async"
-                    className="pv-hero__title-img"
-                  />
+                  {shouldLoad ? (
+                    <img
+                      src={slide.logoImg}
+                      alt={`${slide.title} Logo`}
+                      title={`${slide.title} Official Title Logo`}
+                      width={360}
+                      height={120}
+                      decoding="async"
+                      className="pv-hero__title-img"
+                    />
+                  ) : (
+                    <div style={{ width: '220px', height: '60px' }} />
+                  )}
                 </div>
 
                 {/* Trending / Category Badge */}
@@ -276,12 +304,15 @@ export default function PrimeHero({
         })}
       </div>
 
-      {/* Navigation Arrows with smooth hover and scale */}
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows with smooth hover and on-demand prefetch */}
       <button
         type="button"
         className="pv-hero__arrow pv-hero__arrow--left"
         onClick={handlePrev}
+        onMouseEnter={() => {
+          const prevIdx = currentSlideIndex === 0 ? HERO_SLIDES.length - 1 : currentSlideIndex - 1;
+          setLoadedSlideIndices((prev) => (prev.includes(prevIdx) ? prev : [...prev, prevIdx]));
+        }}
         aria-label="Previous slide"
       >
         <svg width="20" height="38" viewBox="0 0 18 34" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" className="pv-chevron-svg">
@@ -292,6 +323,10 @@ export default function PrimeHero({
         type="button"
         className="pv-hero__arrow pv-hero__arrow--right"
         onClick={handleNext}
+        onMouseEnter={() => {
+          const nextIdx = (currentSlideIndex + 1) % HERO_SLIDES.length;
+          setLoadedSlideIndices((prev) => (prev.includes(nextIdx) ? prev : [...prev, nextIdx]));
+        }}
         aria-label="Next slide"
       >
         <svg width="20" height="38" viewBox="0 0 18 34" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" className="pv-chevron-svg">
@@ -311,6 +346,9 @@ export default function PrimeHero({
               aria-selected={isActive}
               className={`pv-hero__dot-pill ${isActive ? 'pv-hero__dot-pill--active' : ''}`}
               onClick={() => goToSlide(idx)}
+              onMouseEnter={() => {
+                setLoadedSlideIndices((prev) => (prev.includes(idx) ? prev : [...prev, idx]));
+              }}
               aria-label={`Go to slide ${idx + 1}`}
             >
               {isActive && (

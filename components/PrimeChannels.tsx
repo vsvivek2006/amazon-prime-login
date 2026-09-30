@@ -50,6 +50,7 @@ export default function PrimeChannels({ onSubscribeChannel }: PrimeChannelsProps
                   title={`${c.name} on Prime Video`}
                   width={120}
                   height={40}
+                  loading="lazy"
                   decoding="async"
                   className="pv-channel-logo-img"
                   onError={(e) => {

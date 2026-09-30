@@ -16,6 +16,7 @@ export default function PrimeFooter() {
               className="pv-footer-logo"
               width={110}
               height={32}
+              loading="lazy"
               decoding="async"
             />
           </Link>

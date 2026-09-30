@@ -23,7 +23,7 @@ export default function PrimeMainView({ initialTab = 'Home' }: PrimeMainViewProp
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [authMode, setAuthMode] = useState<'signin' | 'join'>('join');
-  const [visibleRows, setVisibleRows] = useState(4);
+  const [visibleRows, setVisibleRows] = useState(3);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
