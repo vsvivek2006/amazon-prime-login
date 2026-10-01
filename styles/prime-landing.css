@@ -2191,3 +2191,28 @@ img {
   content-visibility: auto;
   contain-intrinsic-size: 0 280px;
 }
+
+/* Empty Search / Category State */
+.pv-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.pv-empty-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+
+.pv-empty-subtitle {
+  font-size: 14px;
+  color: #8197a4;
+  max-width: 420px;
+  line-height: 1.5;
+}

@@ -64,11 +64,30 @@ export default function PrimeNavbar({
     onSearchChange?.(e.target.value);
   };
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    tab: string
+  ) => {
+    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+      if (onTabChange) {
+        e.preventDefault();
+        setLocalActiveTab(tab);
+        onTabChange(tab);
+        setIsMobileMenuOpen(false);
+      }
+    }
+  };
+
   return (
     <>
       <header className={`pv-navbar${isScrolled ? ' pv-navbar--scrolled' : ''}`}>
         {/* Logo */}
-        <Link href="/" className="pv-logo-link" title="Prime Video">
+        <Link
+          href="/"
+          className="pv-logo-link"
+          title="Prime Video"
+          onClick={(e) => handleNavClick(e, 'Home')}
+        >
           <img
             src="/media/prime-video-logo.png"
             alt="Prime Video"
@@ -85,10 +104,7 @@ export default function PrimeNavbar({
           <Link
             href="/"
             className={`pv-nav-link ${activeTab === 'Home' ? 'pv-nav-link--active' : ''}`}
-            onClick={() => {
-              setLocalActiveTab('Home');
-              onTabChange?.('Home');
-            }}
+            onClick={(e) => handleNavClick(e, 'Home')}
           >
             {activeTab === 'Home' ? <span className="pv-nav-pill">Home</span> : 'Home'}
           </Link>
@@ -99,10 +115,7 @@ export default function PrimeNavbar({
                 key={item}
                 href={path}
                 className={`pv-nav-link ${activeTab === item ? 'pv-nav-link--active' : ''}`}
-                onClick={() => {
-                  setLocalActiveTab(item);
-                  onTabChange?.(item);
-                }}
+                onClick={(e) => handleNavClick(e, item)}
               >
                 {activeTab === item ? <span className="pv-nav-pill">{item}</span> : item}
               </Link>
@@ -112,10 +125,7 @@ export default function PrimeNavbar({
           <Link
             href="/subscriptions"
             className={`pv-nav-link pv-nav-link--icon ${activeTab === 'Subscriptions' ? 'pv-nav-link--active' : ''}`}
-            onClick={() => {
-              setLocalActiveTab('Subscriptions');
-              onTabChange?.('Subscriptions');
-            }}
+            onClick={(e) => handleNavClick(e, 'Subscriptions')}
           >
             {activeTab === 'Subscriptions' ? (
               <span className="pv-nav-pill pv-nav-pill--icon">
@@ -142,10 +152,7 @@ export default function PrimeNavbar({
           <Link
             href="/store"
             className={`pv-nav-link pv-nav-link--icon ${activeTab === 'Store' ? 'pv-nav-link--active' : ''}`}
-            onClick={() => {
-              setLocalActiveTab('Store');
-              onTabChange?.('Store');
-            }}
+            onClick={(e) => handleNavClick(e, 'Store')}
           >
             {activeTab === 'Store' ? (
               <span className="pv-nav-pill pv-nav-pill--icon">
@@ -310,11 +317,7 @@ export default function PrimeNavbar({
                     key={item}
                     href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '-')}`}
                     className={`pv-mobile-link ${activeTab === item ? 'pv-mobile-link--active' : ''}`}
-                    onClick={() => {
-                      setLocalActiveTab(item);
-                      onTabChange?.(item);
-                      setIsMobileMenuOpen(false);
-                    }}
+                    onClick={(e) => handleNavClick(e, item)}
                   >
                     {item}
                   </Link>
