@@ -51,7 +51,7 @@ export default function PrimeAuthModal({
     <div className="pv-modal-overlay" onClick={onClose}>
       <div
         className="pv-modal-content"
-        style={{ maxWidth: '440px', background: '#0f172a', padding: '36px' }}
+        style={{ maxWidth: '440px', background: '#0f172a', padding: 'min(36px, 8vw)' }}
         onClick={(e) => e.stopPropagation()}
       >
         <button

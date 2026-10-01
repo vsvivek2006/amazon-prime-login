@@ -71,7 +71,7 @@ export default function PrimeMovieRow({
             aria-label={`See more titles in ${title}`}
             onClick={() => onSelectMovie(movies[0])}
           >
-            See more <ChevronRight size={14} />
+            <span>See more</span> <ChevronRight size={14} className="pv-see-more-icon" />
           </button>
         </div>
 
@@ -96,10 +96,10 @@ export default function PrimeMovieRow({
             ref={trackRef}
             onScroll={checkScroll}
           >
-            {movies.map((m) => (
+            {movies.map((m, idx) => (
               <PrimeMovieCard
                 key={m.id}
-                movie={m}
+                movie={title.toLowerCase().includes('top 10') ? { ...m, rank: m.rank || idx + 1 } : m}
                 onSelect={onSelectMovie}
                 onPlay={onPlayMovie}
               />

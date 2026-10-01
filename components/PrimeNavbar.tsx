@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -186,6 +187,22 @@ export default function PrimeNavbar({
                   if (!searchVal) setSearchOpen(false);
                 }}
               />
+              {searchOpen && (
+                <button
+                  type="button"
+                  className="pv-search-close-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSearchVal('');
+                    onSearchChange?.('');
+                    setSearchOpen(false);
+                  }}
+                  aria-label="Close search"
+                  title="Close search"
+                >
+                  <X size={15} />
+                </button>
+              )}
             </div>
           </div>
 

@@ -264,6 +264,8 @@ img {
   width: 0;
   overflow: hidden;
   opacity: 0;
+  display: flex;
+  align-items: center;
   transition: width 0.32s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
 }
 
@@ -279,12 +281,26 @@ img {
   color: #ffffff;
   font-size: 13px;
   font-family: inherit;
-  width: 200px;
-  padding: 6px 8px 6px 4px;
+  width: 100%;
+  padding: 6px 6px 6px 4px;
 }
 
-.pv-search-input::placeholder {
+.pv-search-close-btn {
+  background: transparent;
+  border: none;
   color: #8197a4;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 4px;
+  transition: color 0.15s ease;
+}
+
+.pv-search-close-btn:hover {
+  color: #ffffff;
 }
 
 .pv-search-icon-btn {
@@ -1050,16 +1066,19 @@ img {
 
 .pv-row-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding: 0;
+  gap: 12px;
 }
 
 .pv-row-title-wrap {
   display: flex;
   align-items: baseline;
   gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 
 .pv-row-title {
@@ -1067,6 +1086,8 @@ img {
   font-weight: 700;
   color: #fff;
   letter-spacing: 0;
+  line-height: 1.45;
+  margin: 0;
 }
 
 .pv-row-subtitle {
@@ -1239,30 +1260,21 @@ img {
   pointer-events: none;
 }
 
-/* Live Amazon Prime Watermark bottom-right */
-.pv-card-prime-watermark {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  z-index: 4;
-  pointer-events: none;
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.8));
-  opacity: 0.9;
-}
-
-/* Top-10 rank */
+/* Top-10 rank indicator */
 .pv-top10-rank {
   position: absolute;
-  bottom: -12px;
-  left: -6px;
-  font-size: 65px;
+  bottom: -4px;
+  left: -8px;
+  font-size: 70px;
   font-weight: 900;
-  color: var(--bg);
-  -webkit-text-stroke: 3px #2e4055;
-  line-height: 1;
+  color: #0b1118;
+  -webkit-text-stroke: 2.5px #456280;
+  line-height: 0.9;
   z-index: 5;
   pointer-events: none;
   user-select: none;
+  font-family: 'Amazon Ember', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9));
 }
 
 /* ====================================================
@@ -1777,6 +1789,9 @@ img {
   .pv-navbar {
     height: 56px;
     padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .pv-navbar--scrolled {
@@ -1785,11 +1800,13 @@ img {
   }
 
   .pv-logo-link {
-    margin-right: 10px;
+    margin-right: 0;
+    flex-shrink: 0;
   }
 
   .pv-logo-img {
     height: 22px;
+    width: auto;
   }
 
   .pv-navbar--scrolled .pv-logo-img {
@@ -1800,11 +1817,11 @@ img {
     display: none;
   }
 
-  .pv-icon-btn {
+  .pv-lang-btn {
     display: none;
   }
 
-  .pv-avatar-btn {
+  .pv-grid-btn {
     display: none;
   }
 
@@ -1812,28 +1829,74 @@ img {
     display: none;
   }
 
-  .pv-lang-btn {
+  .pv-avatar-btn {
     display: none;
   }
 
-  .pv-nav-actions {
-    gap: 8px;
+  .pv-join-btn {
+    display: none;
   }
 
-  .pv-join-btn {
-    padding: 6px 12px;
-    font-size: 13px;
-    height: 32px;
-    border-radius: 4px;
+  /* Right-align action buttons on mobile */
+  .pv-nav-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Make Search icon visible on mobile on the right */
+  .pv-search-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .pv-icon-btn.pv-search-icon-btn {
+    display: flex;
+    width: 38px;
+    height: 38px;
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
   }
 
   .pv-mobile-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     padding: 6px;
+    margin-left: 2px;
+  }
+
+  /* Mobile Expanding Search Bar Overlay */
+  .pv-search-container--open {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    right: 10px;
+    height: 42px;
+    background: #151e27;
+    border-radius: 6px;
+    z-index: 100;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(0, 168, 225, 0.6);
+  }
+
+  .pv-search-container--open .pv-search-input-wrap {
+    width: calc(100% - 36px);
+    display: flex;
+    align-items: center;
+    opacity: 1;
+  }
+
+  .pv-search-container--open .pv-search-input {
+    width: 100%;
+    font-size: 14px;
+    color: #ffffff;
+    padding: 8px 6px;
   }
 
   .pv-hero {
@@ -1874,7 +1937,15 @@ img {
   }
 
   .pv-card {
-    flex: 0 0 160px;
+    flex: 0 0 210px;
+  }
+
+  .pv-scraped-row {
+    margin-bottom: 28px;
+  }
+
+  #scraped-row-0 {
+    margin-top: 18px;
   }
 }
 
@@ -1884,7 +1955,6 @@ img {
   .pv-landing-root {
     overflow-x: hidden;
     width: 100%;
-    max-width: 100vw;
   }
 
   .pv-hero {
@@ -1902,7 +1972,9 @@ img {
   }
 
   .pv-hero__btn-watch-prime {
-    padding: 10px 16px;
+    padding: 10px 12px;
+    min-width: 0;
+    flex: 1;
   }
 
   .pv-hero__btn-line-main {
@@ -1926,43 +1998,85 @@ img {
     display: none; /* Keep legal bar clean on narrow mobile */
   }
 
+  .pv-hero__btn-group {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .pv-container {
     padding: 0 16px;
   }
 
   .pv-row-header {
-    padding: 0 16px;
-    margin-bottom: 6px;
+    padding: 0;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .pv-row-title-wrap {
+    flex: 1;
+    min-width: 0;
   }
 
   .pv-row-title {
     font-size: 17px;
     font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    word-break: break-word;
+    letter-spacing: 0.15px;
   }
 
   .pv-row-see-all {
     font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 0;
   }
 
   .pv-carousel-wrap {
-    margin: 0;
+    margin: 0 -16px; /* Negative margin to let it bleed to edge */
   }
 
   .pv-carousel-track {
-    padding: 4px 16px 14px;
-    gap: 8px;
+    margin: 0; /* Reset negative margin so cards don't collide into heading */
+    padding: 6px 16px 16px;
+    gap: 12px;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
   }
 
   .pv-card {
-    flex: 0 0 155px;
+    flex: 0 0 clamp(185px, 50vw, 215px);
     scroll-snap-align: start;
     border-radius: 4px;
   }
 
   .pv-card-poster-wrap {
     border-radius: 4px;
+  }
+
+  .pv-top10-rank {
+    font-size: 54px;
+    bottom: -3px;
+    left: -6px;
+    -webkit-text-stroke: 2px #456280;
+  }
+
+  .pv-scraped-row {
+    margin-bottom: 36px;
+  }
+
+  #scraped-row-0 {
+    margin-top: 26px;
   }
 
   .pv-arrow-btn {

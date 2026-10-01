@@ -59,6 +59,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.pv-blog-card {
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pv-blog-card:hover {
+  border-color: rgba(0, 168, 225, 0.45) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
 a {
   color: var(--amzn-link);
   text-decoration: none;
@@ -89,4 +99,87 @@ button {
 .amzn-link:hover {
   color: var(--amzn-link-hover);
   text-decoration: underline;
+}
+
+/* ─── Prime Video Blog Content Styles ─────────────────────────────── */
+.prime-blog-content {
+  color: rgba(255,255,255,0.82);
+  font-size: 16px;
+  line-height: 1.8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+.prime-blog-content h2 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2.2rem 0 0.9rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.prime-blog-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  margin: 1.8rem 0 0.7rem;
+  line-height: 1.35;
+}
+.prime-blog-content p {
+  margin: 0 0 1.3rem;
+}
+.prime-blog-content ul,
+.prime-blog-content ol {
+  margin: 0 0 1.3rem 1.4rem;
+  padding: 0;
+}
+.prime-blog-content li {
+  margin-bottom: 0.45rem;
+}
+.prime-blog-content strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+.prime-blog-content em {
+  color: rgba(255,255,255,0.75);
+  font-style: italic;
+}
+.prime-blog-content a {
+  color: #00a8e1;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,168,225,0.35);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prime-blog-content a:hover {
+  color: #ff9900;
+  border-color: rgba(255,153,0,0.5);
+}
+.prime-blog-content blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.4rem;
+  border-left: 3px solid #00a8e1;
+  background: rgba(0,168,225,0.06);
+  border-radius: 0 10px 10px 0;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
+}
+.prime-blog-content blockquote p { margin: 0; }
+.prime-blog-content code {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.875em;
+  background: rgba(255,255,255,0.08);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  color: #ff9900;
+}
+.prime-blog-content pre {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  margin-bottom: 1.4rem;
+}
+.prime-blog-content hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 2.5rem 0;
 }

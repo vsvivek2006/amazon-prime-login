@@ -39,4 +39,6 @@ vercel-dns-fix.cjs
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
+# supabase
+supabase/
+.temp/

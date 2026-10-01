@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/live-tv', priority: 0.8, changeFrequency: 'daily' as const },
     { path: '/subscriptions', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/store', priority: 0.8, changeFrequency: 'daily' as const },
+    { path: '/blog', priority: 0.7, changeFrequency: 'daily' as const },
     { path: '/login', priority: 0.5, changeFrequency: 'monthly' as const },
   ];
 

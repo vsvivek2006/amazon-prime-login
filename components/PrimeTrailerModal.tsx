@@ -82,7 +82,7 @@ export default function PrimeTrailerModal({
             Experience non-stop thrill and high-stakes drama in this hit title streaming exclusively on Amazon Prime Video in stunning 4K Ultra HD and immersive Dolby Atmos audio.
           </p>
 
-          <div style={{ display: 'flex', gap: '14px', marginTop: '20px' }}>
+          <div style={{ display: 'flex', gap: '14px', marginTop: '20px', flexWrap: 'wrap' }}>
             <button
               type="button"
               className="pv-btn-hero-primary"
