@@ -93,8 +93,8 @@ export function PostTable({ initialPosts }: { initialPosts: Post[] }) {
   }
 
   return (
-    <div style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: '14px', overflow: 'hidden' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <div style={{ border: '1px solid rgba(255,255,255,0.07)', borderRadius: '14px', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <table style={{ width: '100%', minWidth: '600px', borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ background: 'rgba(255,255,255,0.03)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
             {['Title', 'Status', 'Author', 'Date', 'Actions'].map((h) => (
