@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Toaster } from 'sonner';
 import './globals.css';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.primevideo.com';
@@ -237,7 +238,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogSchema) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Toaster
+          richColors
+          position="top-right"
+          theme="dark"
+          closeButton
+        />
+        {children}
+      </body>
     </html>
   );
 }

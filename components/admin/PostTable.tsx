@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Edit2, Trash2, Eye, Loader2, CheckCircle, Clock, FileText } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Post {
   id: string;
@@ -31,13 +32,15 @@ export function PostTable({ initialPosts }: { initialPosts: Post[] }) {
   async function handleDelete(id: string, title: string) {
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     setDeletingId(id);
+    const toastId = toast.loading(`Deleting "${title}"...`);
     try {
       const res = await fetch(`/api/blog/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Delete failed');
       setPosts(posts.filter((p) => p.id !== id));
+      toast.success(`"${title}" deleted successfully`, { id: toastId });
       router.refresh();
     } catch (err) {
-      alert('Failed to delete: ' + (err instanceof Error ? err.message : 'Unknown error'));
+      toast.error('Failed to delete: ' + (err instanceof Error ? err.message : 'Unknown error'), { id: toastId });
     } finally {
       setDeletingId(null);
     }
@@ -57,9 +60,10 @@ export function PostTable({ initialPosts }: { initialPosts: Post[] }) {
       });
       if (!res.ok) throw new Error('Update failed');
       setPosts(posts.map((p) => p.id === post.id ? { ...p, status: newStatus } : p));
+      toast.success(`Article marked as ${newStatus}`);
       router.refresh();
     } catch (err) {
-      alert('Failed to update status: ' + (err instanceof Error ? err.message : 'Unknown error'));
+      toast.error('Failed to update status: ' + (err instanceof Error ? err.message : 'Unknown error'));
     } finally {
       setTogglingId(null);
     }

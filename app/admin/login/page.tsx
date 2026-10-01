@@ -3,6 +3,7 @@
 import { useState, FormEvent, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Tv2, Lock, Mail, Eye, EyeOff, Loader2, Shield } from 'lucide-react';
+import { toast } from 'sonner';
 
 function LoginForm() {
   const router = useRouter();
@@ -30,14 +31,19 @@ function LoginForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || 'Login failed');
+        const msg = data.error || 'Login failed';
+        setError(msg);
+        toast.error(msg);
         return;
       }
 
+      toast.success('Signed in successfully!');
       router.push(redirect);
       router.refresh();
     } catch {
-      setError('Network error. Please try again.');
+      const msg = 'Network error. Please try again.';
+      setError(msg);
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

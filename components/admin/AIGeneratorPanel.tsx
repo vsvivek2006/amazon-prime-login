@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Sparkles, Loader2, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
+import { toast } from 'sonner';
 import { AVAILABLE_MODELS } from '@/lib/ai/models';
 
 const SUGGESTED_TOPICS = [
@@ -39,9 +40,14 @@ export function AIGeneratorPanel({ onGenerated, disabled = false }: AIGeneratorP
   const selectedModelInfo = AVAILABLE_MODELS.find((m) => m.id === selectedModel) || AVAILABLE_MODELS[0];
 
   async function handleGenerate() {
-    if (!topic.trim()) { setError('Please enter a topic first.'); return; }
+    if (!topic.trim()) {
+      setError('Please enter a topic first.');
+      toast.error('Please enter a topic first.');
+      return;
+    }
     setError(null);
     setIsGenerating(true);
+    const toastId = toast.loading('Generating editorial article draft with AI...');
 
     try {
       const res = await fetch('/api/blog/generate', {
@@ -62,8 +68,11 @@ export function AIGeneratorPanel({ onGenerated, disabled = false }: AIGeneratorP
 
       onGenerated(data);
       setHasGenerated(true);
+      toast.success('AI article draft generated successfully!', { id: toastId });
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Something went wrong');
+      const msg = err instanceof Error ? err.message : 'Something went wrong';
+      setError(msg);
+      toast.error(msg, { id: toastId });
     } finally {
       setIsGenerating(false);
     }

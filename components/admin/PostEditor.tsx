@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { Save, Send, Loader2, Eye, EyeOff, X } from 'lucide-react';
+import { toast } from 'sonner';
 import { AIGeneratorPanel } from './AIGeneratorPanel';
 import slugify from 'slugify';
 import { TiptapEditor } from './TiptapEditor';
@@ -77,11 +78,14 @@ export function PostEditor({ initialPost }: PostEditorProps) {
 
   async function handleSave(saveStatus: 'draft' | 'published') {
     if (!title.trim() || !slug.trim() || !content.trim()) {
-      setSaveError('Title, slug, and content are required.');
+      const msg = 'Title, slug, and content are required.';
+      setSaveError(msg);
+      toast.error(msg);
       return;
     }
     setSaveError(null);
     setIsSaving(true);
+    const toastId = toast.loading(isEditing ? 'Updating article...' : 'Creating article...');
 
     try {
       const payload = { title, slug, meta_description: metaDescription, content, author, tags, status: saveStatus };
@@ -98,10 +102,20 @@ export function PostEditor({ initialPost }: PostEditorProps) {
       if (!res.ok) throw new Error(data.error || 'Save failed');
 
       setStatus(saveStatus);
+      toast.success(
+        isEditing
+          ? 'Article updated successfully!'
+          : saveStatus === 'published'
+          ? 'Article published live!'
+          : 'Article draft saved!',
+        { id: toastId }
+      );
       router.push('/admin/blog');
       router.refresh();
     } catch (err: unknown) {
-      setSaveError(err instanceof Error ? err.message : 'Failed to save');
+      const msg = err instanceof Error ? err.message : 'Failed to save';
+      setSaveError(msg);
+      toast.error(msg, { id: toastId });
     } finally {
       setIsSaving(false);
     }
