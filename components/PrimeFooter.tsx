@@ -24,6 +24,11 @@ export default function PrimeFooter() {
 
         <ul className="pv-footer-links" aria-label="Footer links">
           <li>
+            <Link href="/login" className="pv-footer-link">
+              Sign In
+            </Link>
+          </li>
+          <li>
             <a
               href="https://www.primevideo.com/help/ref=atv_ftr_terms"
               target="_blank"

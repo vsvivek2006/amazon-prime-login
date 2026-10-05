@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Page Not Found – Prime Video',
+  title: 'Page Not Found',
   description: "We're sorry. The page you requested could not be found on Prime Video.",
 };
 

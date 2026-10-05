@@ -6,31 +6,39 @@ interface StepPasswordProps {
   email: string;
   password: string;
   setPassword: (val: string) => void;
+  name?: string;
+  setName?: (val: string) => void;
   onSignIn: (e: React.FormEvent) => void;
   onChangeEmail: () => void;
   error: string | null;
   onOpenKeepSignedInDetails: () => void;
   onGetOtp: () => void;
   isDarkMode?: boolean;
+  mode?: 'signin' | 'signup';
 }
 
 export default function StepPassword({
   email,
   password,
   setPassword,
+  name = '',
+  setName,
   onSignIn,
   onChangeEmail,
   error,
   onOpenKeepSignedInDetails,
   onGetOtp,
   isDarkMode = false,
+  mode = 'signin',
 }: StepPasswordProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [keepSignedIn, setKeepSignedIn] = useState(false);
 
   return (
     <div className={`amzn-auth-card ${isDarkMode ? 'dark' : ''}`}>
-      <h1 className="amzn-card-title">Sign in</h1>
+      <h1 className="amzn-card-title">
+        {mode === 'signin' ? 'Prime Video Sign In' : 'Create Prime Video Account'}
+      </h1>
 
       {/* User identifier row with Change link */}
       <div className="amzn-identifier-row">
@@ -39,25 +47,48 @@ export default function StepPassword({
           type="button"
           onClick={onChangeEmail}
           className="amzn-link amzn-change-link"
+          id="change-email-btn"
         >
           Change
         </button>
       </div>
 
       <form onSubmit={onSignIn} noValidate>
+        {/* Name input if in signup mode */}
+        {mode === 'signup' && (
+          <div className="amzn-form-group">
+            <label htmlFor="ap_customer_name" className="amzn-form-label">
+              Your name
+            </label>
+            <input
+              id="ap_customer_name"
+              name="customerName"
+              type="text"
+              autoComplete="name"
+              placeholder="First and last name"
+              className="amzn-input"
+              value={name}
+              onChange={(e) => setName && setName(e.target.value)}
+              autoFocus
+            />
+          </div>
+        )}
+
         <div className="amzn-form-group">
           <div className="amzn-label-row">
             <label htmlFor="ap_password" className="amzn-form-label">
-              Password
+              {mode === 'signin' ? 'Password' : 'Password'}
             </label>
-            <a
-              href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GH7NM2YWEVR2FQBC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="amzn-link amzn-forgot-link"
-            >
-              Forgot password?
-            </a>
+            {mode === 'signin' && (
+              <a
+                href="https://www.amazon.com/gp/help/customer/display.html?nodeId=GH7NM2YWEVR2FQBC"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="amzn-link amzn-forgot-link"
+              >
+                Forgot password?
+              </a>
+            )}
           </div>
 
           <div className="amzn-password-field-wrapper">
@@ -65,11 +96,12 @@ export default function StepPassword({
               id="ap_password"
               name="password"
               type={showPassword ? 'text' : 'password'}
-              autoComplete="current-password"
+              autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+              placeholder={mode === 'signup' ? 'At least 6 characters' : ''}
               className={`amzn-input ${error ? 'error' : ''}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              autoFocus
+              autoFocus={mode === 'signin'}
             />
             <button
               type="button"
@@ -110,6 +142,12 @@ export default function StepPassword({
             </button>
           </div>
 
+          {mode === 'signup' && (
+            <div style={{ fontSize: '12px', color: '#555555', marginTop: '4px' }}>
+              ℹ️ Passwords must be at least 6 characters.
+            </div>
+          )}
+
           {error && (
             <div className="amzn-inline-error" role="alert">
               <span className="amzn-inline-error-icon">!</span>
@@ -118,54 +156,78 @@ export default function StepPassword({
           )}
         </div>
 
-        <button type="submit" className="amzn-btn-primary">
-          Sign in
+        {/* Primary Submit Button */}
+        <button type="submit" className="amzn-btn-primary" id="signInSubmit">
+          {mode === 'signin' ? 'Sign in' : 'Create your Amazon account'}
         </button>
 
-        {/* Keep me signed in */}
-        <div className="amzn-keep-signed-in">
-          <label className="amzn-checkbox-label">
-            <input
-              type="checkbox"
-              checked={keepSignedIn}
-              onChange={(e) => setKeepSignedIn(e.target.checked)}
-              className="amzn-checkbox-input"
-            />
-            <span className="amzn-checkbox-text">Keep me signed in.</span>
-          </label>
-          <button
-            type="button"
-            className="amzn-details-link"
-            onClick={onOpenKeepSignedInDetails}
-          >
-            Details
-            <svg
-              viewBox="0 0 10 10"
-              width="8"
-              height="8"
-              className="amzn-details-arrow"
-              aria-hidden="true"
+        {/* Keep Me Signed In for Login */}
+        {mode === 'signin' && (
+          <div className="amzn-keep-signed-in">
+            <label className="amzn-checkbox-label">
+              <input
+                type="checkbox"
+                name="rememberMe"
+                className="amzn-checkbox-input"
+                checked={keepSignedIn}
+                onChange={(e) => setKeepSignedIn(e.target.checked)}
+              />
+              <span className="amzn-checkbox-text">Keep me signed in.</span>
+            </label>
+            <button
+              type="button"
+              onClick={onOpenKeepSignedInDetails}
+              className="amzn-details-link"
             >
-              <path d="M2.5 1.5 L7.5 5 L2.5 8.5 Z" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
+              Details
+              <span className="amzn-details-arrow">▾</span>
+            </button>
+          </div>
+        )}
 
-        {/* Or divider */}
-        <div className="amzn-or-divider">
-          <span className="amzn-or-line"></span>
-          <span className="amzn-or-text">or</span>
-          <span className="amzn-or-line"></span>
-        </div>
+        {/* Legal text for signup */}
+        {mode === 'signup' && (
+          <div className="amzn-legal-text" style={{ marginTop: '16px' }}>
+            By creating an account, you agree to Amazon&apos;s{' '}
+            <a
+              href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_condition_of_use?nodeId=508088"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="amzn-link"
+            >
+              Conditions of Use
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://www.amazon.com/gp/help/customer/display.html/ref=ap_signin_notification_privacy_notice?nodeId=468496"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="amzn-link"
+            >
+              Privacy Notice
+            </a>
+            .
+          </div>
+        )}
 
-        {/* OTP button */}
-        <button
-          type="button"
-          className="amzn-btn-secondary"
-          onClick={onGetOtp}
-        >
-          Get an OTP on your phone
-        </button>
+        {/* Sign in with OTP option */}
+        {mode === 'signin' && (
+          <>
+            <div className="amzn-or-divider">
+              <span className="amzn-or-line"></span>
+              <span className="amzn-or-text">or</span>
+              <span className="amzn-or-line"></span>
+            </div>
+
+            <button
+              type="button"
+              className="amzn-btn-secondary"
+              onClick={onGetOtp}
+            >
+              Get an OTP on your phone
+            </button>
+          </>
+        )}
       </form>
     </div>
   );

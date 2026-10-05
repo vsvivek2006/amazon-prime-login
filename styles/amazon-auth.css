@@ -911,3 +911,132 @@ nextjs-portal,
     transform: translateY(0);
   }
 }
+
+/* ==========================================================================
+   SEO CONTENT & FAQ SECTION (Prime Video Login Guide & Support)
+   ========================================================================== */
+.amzn-seo-faq-section {
+  width: 100%;
+  max-width: 720px;
+  margin: 36px auto 16px auto;
+  padding: 0 16px;
+}
+
+.amzn-seo-faq-container {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.amzn-page-wrapper.dark .amzn-seo-faq-container {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.amzn-seo-faq-heading {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f1111;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.amzn-page-wrapper.dark .amzn-seo-faq-heading {
+  color: #f2f4f8;
+}
+
+.amzn-seo-faq-intro {
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.amzn-page-wrapper.dark .amzn-seo-faq-intro {
+  color: #94a3b8;
+}
+
+.amzn-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.amzn-faq-item {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 12px;
+}
+
+.amzn-page-wrapper.dark .amzn-faq-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.amzn-faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.amzn-faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #007185;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.amzn-page-wrapper.dark .amzn-faq-question {
+  color: #00a8e1;
+}
+
+.amzn-faq-question:hover {
+  color: #c7511f;
+}
+
+.amzn-page-wrapper.dark .amzn-faq-question:hover {
+  color: #38bdf8;
+}
+
+.amzn-faq-arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.amzn-faq-arrow.open {
+  transform: rotate(180deg);
+}
+
+.amzn-faq-answer {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333333;
+  margin-top: 8px;
+  padding-left: 2px;
+}
+
+.amzn-page-wrapper.dark .amzn-faq-answer {
+  color: #cbd5e1;
+}
+
+.amzn-faq-answer p {
+  margin-bottom: 8px;
+}
+
+.amzn-faq-answer ol, .amzn-faq-answer ul {
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.amzn-faq-answer li {
+  margin-bottom: 4px;
+}

@@ -382,7 +382,7 @@ export default function PrimeMainView({ initialTab = 'Home' }: PrimeMainViewProp
         onJoinPrime={handleOpenJoin}
       />
 
-      {/* Quick Authentication / Trial Dialog */}
+      {/* Quick Authentication Dialog */}
       <PrimeAuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}

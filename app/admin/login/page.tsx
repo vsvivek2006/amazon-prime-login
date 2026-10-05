@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { LoginForm } from '@/components/admin/LoginForm';
 
 export const metadata: Metadata = {
-  title: 'Admin Login — Prime Video',
+  title: 'Admin Login',
   robots: { index: false, follow: false },
 };
 

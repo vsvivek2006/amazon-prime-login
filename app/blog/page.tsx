@@ -4,7 +4,7 @@ import { createServerClient } from '@/lib/supabase/server';
 import { Calendar, User, ArrowRight, ChevronLeft, ChevronRight, Tv2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Blog — Prime Video Insights & Entertainment',
+  title: 'Blog — Streaming Insights & Entertainment',
   description: 'Explore expert articles on streaming, Amazon Originals, must-watch shows, movies, and everything Prime Video. Updated regularly by our editorial team.',
   alternates: { canonical: '/blog' },
 };

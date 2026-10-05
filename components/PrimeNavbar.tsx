@@ -232,18 +232,23 @@ export default function PrimeNavbar({
             </svg>
           </button>
 
-          {/* Sign In button matching official Prime Video desktop layout */}
-          <button
-            type="button"
+          {/* Sign In link matching official Prime Video desktop layout and providing SEO internal link to /login */}
+          <Link
+            href="/login"
             className="pv-signin-btn"
-            onClick={onOpenSignIn}
+            onClick={(e) => {
+              if (onOpenSignIn) {
+                e.preventDefault();
+                onOpenSignIn();
+              }
+            }}
             aria-label="Sign In"
             title="Sign In to Prime Video"
             id="navbar-signin-btn"
           >
             <User size={16} strokeWidth={2.4} />
             <span>Sign In</span>
-          </button>
+          </Link>
 
           {/* Join Prime button */}
           <button
@@ -334,16 +339,19 @@ export default function PrimeNavbar({
               >
                 Join Prime – Watch Now
               </button>
-              <button
-                type="button"
+              <Link
+                href="/login"
                 className="pv-mobile-signin-btn"
-                onClick={() => {
+                onClick={(e) => {
                   setIsMobileMenuOpen(false);
-                  onOpenSignIn();
+                  if (onOpenSignIn) {
+                    e.preventDefault();
+                    onOpenSignIn();
+                  }
                 }}
               >
                 Already a member? Sign In
-              </button>
+              </Link>
             </div>
           </div>
         </div>

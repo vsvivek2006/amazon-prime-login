@@ -10,6 +10,8 @@ interface StepEmailProps {
   error: string | null;
   onCreateAccount: () => void;
   isDarkMode?: boolean;
+  mode?: 'signin' | 'signup';
+  onSwitchMode?: (mode: 'signin' | 'signup') => void;
 }
 
 export default function StepEmail({
@@ -19,26 +21,29 @@ export default function StepEmail({
   error,
   onCreateAccount,
   isDarkMode = false,
+  mode = 'signin',
+  onSwitchMode,
 }: StepEmailProps) {
   return (
     <>
       <div className={`amzn-auth-card ${isDarkMode ? 'dark' : ''}`}>
         <h1 className="amzn-card-title">
-          Sign in or create account
+          {mode === 'signin' ? 'Prime Video Sign In' : 'Create Prime Video Account'}
         </h1>
 
         <form onSubmit={onContinue} noValidate>
           <div className="amzn-form-group">
             <label htmlFor="ap_email" className="amzn-form-label">
-              Enter mobile number or email
+              Email address
             </label>
             <input
               id="ap_email"
               name="email"
-              type="text"
-              autoComplete="username"
+              type="email"
+              autoComplete="email"
               autoCapitalize="off"
               autoCorrect="off"
+              placeholder="name@example.com"
               className={`amzn-input ${error ? 'error' : ''}`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +57,7 @@ export default function StepEmail({
             )}
           </div>
 
-          <button type="submit" className="amzn-btn-primary">
+          <button type="submit" className="amzn-btn-primary" id="continue-btn">
             Continue
           </button>
 
@@ -80,20 +85,53 @@ export default function StepEmail({
 
           <AccordionHelp />
 
-          <div className="amzn-business-section">
-            <div className="amzn-business-divider"></div>
-            <div className="amzn-business-title">Buying for work?</div>
-            <a
-              href="https://www.amazon.com/business?ref_=ap_signin_b2b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="amzn-link amzn-business-link"
-            >
-              Create a free business account
-            </a>
-          </div>
+          {mode === 'signin' ? (
+            <div className="amzn-business-section">
+              <div className="amzn-business-divider"></div>
+              <div className="amzn-business-title">Buying for work?</div>
+              <a
+                href="https://www.amazon.com/business?ref_=ap_signin_b2b"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="amzn-link amzn-business-link"
+              >
+                Create a free business account
+              </a>
+            </div>
+          ) : (
+            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid #e7e7e7', fontSize: '13px' }}>
+              <span>Already have an account? </span>
+              <button
+                type="button"
+                onClick={() => onSwitchMode ? onSwitchMode('signin') : onCreateAccount()}
+                className="amzn-link"
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontWeight: 600 }}
+              >
+                Sign in
+              </button>
+            </div>
+          )}
         </form>
       </div>
+
+      {mode === 'signin' && (
+        <div className="amzn-main-container" style={{ marginTop: '24px' }}>
+          <div className="amzn-or-divider">
+            <span className="amzn-or-line"></span>
+            <span className="amzn-or-text">New to Amazon?</span>
+            <span className="amzn-or-line"></span>
+          </div>
+
+          <button
+            type="button"
+            id="createAccountSubmit"
+            className="amzn-btn-secondary"
+            onClick={() => onSwitchMode ? onSwitchMode('signup') : onCreateAccount()}
+          >
+            Create your Amazon account
+          </button>
+        </div>
+      )}
     </>
   );
 }

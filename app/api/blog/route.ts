@@ -17,7 +17,8 @@ export async function GET() {
     return NextResponse.json(data || []);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to fetch posts';
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = message === 'UNAUTHORIZED' ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 
