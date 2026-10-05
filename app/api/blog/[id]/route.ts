@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase/server';
 import { requireAdmin } from '@/lib/auth/session';
 
@@ -33,7 +34,22 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (error.code === '23505') {
+        return NextResponse.json({ error: 'A post with this slug already exists. Please choose a different slug.' }, { status: 400 });
+      }
+      throw error;
+    }
+
+    try {
+      revalidatePath('/admin/blog');
+      revalidatePath(`/admin/blog/${id}/edit`);
+      revalidatePath('/blog');
+      if (data?.slug) revalidatePath(`/blog/${data.slug}`);
+    } catch {
+      // background revalidation error shouldn't block response
+    }
+
     return NextResponse.json(data);
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to update post';
@@ -48,8 +64,25 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
     await requireAdmin();
     const { id } = await params;
     const supabase = createAdminClient();
+
+    // Get post slug first for cache invalidation
+    const { data: post } = await supabase
+      .from('posts')
+      .select('slug')
+      .eq('id', id)
+      .single();
+
     const { error } = await supabase.from('posts').delete().eq('id', id);
     if (error) throw error;
+
+    try {
+      revalidatePath('/admin/blog');
+      revalidatePath('/blog');
+      if (post?.slug) revalidatePath(`/blog/${post.slug}`);
+    } catch {
+      // background revalidation error shouldn't block response
+    }
+
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to delete post';

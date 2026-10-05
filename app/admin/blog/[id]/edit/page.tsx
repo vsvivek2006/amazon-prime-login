@@ -75,9 +75,11 @@ export default async function EditBlogPostPage({ params }: { params: Promise<{ i
           slug: post.slug,
           meta_description: post.meta_description || '',
           content: post.content,
+          cover_image_url: post.cover_image_url || '',
           author: post.author || 'Prime Video Editorial',
           tags: post.tags || [],
           status: post.status,
+          updated_at: post.updated_at,
         }} />
       </div>
     </main>

@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase/server';
 import { requireAdmin } from '@/lib/auth/session';
 
@@ -48,7 +49,21 @@ export async function POST(request: Request) {
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (error.code === '23505') {
+        return NextResponse.json({ error: 'A post with this slug already exists. Please choose a different slug.' }, { status: 400 });
+      }
+      throw error;
+    }
+
+    try {
+      revalidatePath('/admin/blog');
+      revalidatePath('/blog');
+      if (slug) revalidatePath(`/blog/${slug}`);
+    } catch {
+      // background revalidation error shouldn't block response
+    }
+
     return NextResponse.json(data, { status: 201 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to create post';
