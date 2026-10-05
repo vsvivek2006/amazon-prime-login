@@ -7,11 +7,11 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.primevideo.com'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Prime Video – Stream Movies, TV Shows & Amazon Originals',
+    default: 'Prime Video: Watch movies, TV shows, sports, and live TV',
     template: '%s | Prime Video',
   },
   description:
-    'Stream blockbuster movies, hit TV shows, and Amazon Originals like The Boys and Reacher with a Prime Video membership. Enjoy 4K UHD and start watching today.',
+    'Find and watch movies, TV shows, sports, and live TV on Prime Video. Stream a world of entertainment on your favorite devices—anytime, anywhere.',
   keywords: [
     'Prime Video',
     'Amazon Originals',
@@ -48,9 +48,9 @@ export const metadata: Metadata = {
     apple: '/media/prime-video-logo.png',
   },
   openGraph: {
-    title: 'Prime Video – Stream Movies, TV Shows & Amazon Originals',
+    title: 'Prime Video: Watch movies, TV shows, sports, and live TV',
     description:
-      'Stream blockbuster movies, hit TV shows, and Amazon Originals like The Boys and Reacher with a Prime Video membership. Enjoy 4K UHD and start watching today.',
+      'Find and watch movies, TV shows, sports, and live TV on Prime Video. Stream a world of entertainment on your favorite devices—anytime, anywhere.',
     url: baseUrl,
     siteName: 'Prime Video',
     locale: 'en_US',
@@ -61,16 +61,16 @@ export const metadata: Metadata = {
         secureUrl: `${baseUrl}/media/amazon-fullpage.png`,
         width: 1200,
         height: 630,
-        alt: 'Prime Video – Watch Movies, TV Shows & Originals',
+        alt: 'Prime Video: Watch movies, TV shows, sports, and live TV',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prime Video – Stream Movies, TV Shows & Amazon Originals',
+    title: 'Prime Video: Watch movies, TV shows, sports, and live TV',
     description:
-      'Stream blockbuster movies, hit TV shows, and Amazon Originals like The Boys and Reacher with a Prime Video membership.',
+      'Find and watch movies, TV shows, sports, and live TV on Prime Video. Stream a world of entertainment on your favorite devices—anytime, anywhere.',
     images: [
       {
         url: '/media/amazon-fullpage.png',
@@ -206,8 +206,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="ltr">
-      <head>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <head suppressHydrationWarning>
         {/* Performance preconnects for ultra-fast CDN asset delivery (<0.10s initial feel) */}
         <link rel="preconnect" href="https://m.media-amazon.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://m.media-amazon.com" />
@@ -223,22 +223,26 @@ export default function RootLayout({
         {/* Structured Data JSON-LD */}
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogSchema) }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Toaster
           richColors
           position="top-right"

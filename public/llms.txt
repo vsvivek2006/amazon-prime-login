@@ -30,7 +30,7 @@ Prime Video provides on-demand streaming in high definition (HD) and 4K Ultra HD
 ## Access & Membership
 - **Prime Membership**: Includes Prime Video, fast free delivery, Amazon Music Prime, and Prime Reading.
 - **Standalone Prime Video**: Available as an individual video streaming membership.
-- **Free Trial**: 30-day trial available for eligible new subscribers.
+- **Instant Streaming Access**: Stream instantly upon joining Prime membership.
 - **Supported Devices**: Smart TVs (Samsung, LG, Sony), streaming devices (Fire TV, Roku, Apple TV, Chromecast), mobile phones (iOS, Android), game consoles (PS5, Xbox Series X/S), and web browsers.
 
 ## Technical Specifications

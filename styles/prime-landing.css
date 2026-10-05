@@ -84,7 +84,7 @@ img {
   z-index: 9999;
   display: flex;
   align-items: center;
-  padding: 0 48px;
+  padding: 0 28px;
   background: linear-gradient(180deg, rgba(0, 5, 13, 0.92) 0%, rgba(0, 5, 13, 0.5) 60%, transparent 100%);
   border: none;
   transition: height 0.3s cubic-bezier(0.2, 0, 0, 1), background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
@@ -106,7 +106,7 @@ img {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  margin-right: 28px;
+  margin-right: 20px;
   text-decoration: none;
 }
 
@@ -134,9 +134,9 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 0 14px;
+  padding: 0 10px;
   height: 42px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: #c4cdd5;
   white-space: nowrap;
@@ -239,7 +239,7 @@ img {
 .pv-nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-shrink: 0;
 }
 
@@ -392,6 +392,42 @@ img {
 
 .pv-avatar-btn:active {
   transform: scale(0.95);
+}
+
+/* Prominent Sign In button matching official Prime Video desktop */
+.pv-signin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 14px;
+  background: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: 0;
+  transition: height 0.3s cubic-bezier(0.2, 0, 0, 1), padding 0.3s ease, font-size 0.3s ease, background-color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.pv-navbar--scrolled .pv-signin-btn {
+  height: 30px;
+  padding: 0 10px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.pv-signin-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-0.5px);
+}
+
+.pv-signin-btn:active {
+  transform: translateY(0);
 }
 
 /* Join Prime button — exact vibrant blue matching live primevideo.com */
@@ -1826,7 +1862,30 @@ img {
   }
 
   .pv-signin-btn {
-    display: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 33px;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 6px;
+    background: #00a8e1;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 168, 225, 0.35);
+    white-space: nowrap;
+    transition: background-color 0.18s ease, transform 0.12s ease;
+  }
+
+  .pv-signin-btn:hover {
+    background: #0093c7;
+    transform: translateY(-0.5px);
+  }
+
+  .pv-signin-btn:active {
+    transform: translateY(0);
   }
 
   .pv-avatar-btn {

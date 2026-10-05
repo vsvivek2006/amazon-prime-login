@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
 import { X, Lock, CheckCircle, ShieldCheck } from 'lucide-react';
 
 interface PrimeAuthModalProps {
@@ -21,6 +20,13 @@ export default function PrimeAuthModal({
   const [name, setName] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setMode(defaultMode);
+      setError(null);
+    }
+  }, [isOpen, defaultMode]);
 
   if (!isOpen) return null;
 
@@ -113,7 +119,7 @@ export default function PrimeAuthModal({
                   setError(null);
                 }}
               >
-                Start 30-Day Trial
+                Join Prime
               </button>
               <button
                 type="button"
@@ -228,19 +234,9 @@ export default function PrimeAuthModal({
                 className="pv-btn-hero-primary"
                 style={{ width: '100%', justifyContent: 'center', marginTop: '8px', padding: '12px' }}
               >
-                {mode === 'join' ? 'Continue with Free Trial' : 'Sign In to Prime Video'}
+                {mode === 'join' ? 'Join Prime Video' : 'Sign In to Prime Video'}
               </button>
             </form>
-
-            <div style={{ marginTop: '20px', textAlign: 'center' }}>
-              <Link
-                href="/login"
-                style={{ fontSize: '13px', color: '#00a8e1', textDecoration: 'none' }}
-                onClick={onClose}
-              >
-                Open standard Amazon Sign-In page →
-              </Link>
-            </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '20px', justifyContent: 'center', fontSize: '12px', color: '#64748b' }}>
               <ShieldCheck size={14} color="#00a8e1" />

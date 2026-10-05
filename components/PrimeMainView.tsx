@@ -291,7 +291,7 @@ export default function PrimeMainView({ initialTab = 'Home' }: PrimeMainViewProp
   };
 
   const categoryHeadings: Record<string, string> = {
-    Home: 'Welcome to Prime Video – Stream Movies, Watch TV Shows & Discover Amazon Originals',
+    Home: 'Prime Video: Watch movies, TV shows, sports, and live TV',
     Movies: 'Prime Video Movies – Stream Blockbusters, Award-Winning Films & New Releases',
     'TV shows': 'Prime Video TV Shows – Stream Hit Series, Binge Dramas & Amazon Originals',
     'Free to me': 'Free to Me – Stream Movies and TV Shows Included With Prime',
@@ -311,6 +311,7 @@ export default function PrimeMainView({ initialTab = 'Home' }: PrimeMainViewProp
         activeTab={activeTab}
         onTabChange={handleTabChange}
         onOpenSignIn={handleOpenSignIn}
+        onOpenJoin={handleOpenJoin}
         onSearchChange={(q) => setSearchQuery(q)}
       />
 

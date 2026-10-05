@@ -7,6 +7,7 @@ import { Search, Grip, User, ShoppingBag, X } from 'lucide-react';
 
 interface PrimeNavbarProps {
   onOpenSignIn: () => void;
+  onOpenJoin?: () => void;
   onSearchChange?: (query: string) => void;
   activeTab?: string;
   onTabChange?: (tab: string) => void;
@@ -14,6 +15,7 @@ interface PrimeNavbarProps {
 
 export default function PrimeNavbar({
   onOpenSignIn,
+  onOpenJoin,
   onSearchChange,
   activeTab: propActiveTab,
   onTabChange,
@@ -213,13 +215,7 @@ export default function PrimeNavbar({
             </div>
           </div>
 
-          {/* Language Selector EN matching live primevideo.com */}
-          <button type="button" className="pv-lang-btn" aria-label="Language: English" title="Language: English">
-            <span>EN</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </button>
+
 
           {/* 9-dot Grid / Categories */}
           <button type="button" className="pv-icon-btn pv-grid-btn" aria-label="All Categories" title="Categories">
@@ -236,25 +232,26 @@ export default function PrimeNavbar({
             </svg>
           </button>
 
-          {/* User Avatar */}
+          {/* Sign In button matching official Prime Video desktop layout */}
           <button
             type="button"
-            className="pv-avatar-btn"
-            aria-label="Account & Sign In"
+            className="pv-signin-btn"
             onClick={onOpenSignIn}
-            title="Account & Sign In"
+            aria-label="Sign In"
+            title="Sign In to Prime Video"
+            id="navbar-signin-btn"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
+            <User size={16} strokeWidth={2.4} />
+            <span>Sign In</span>
           </button>
 
           {/* Join Prime button */}
           <button
             type="button"
             className="pv-join-btn"
-            onClick={onOpenSignIn}
-            title="Join Prime – Start your 30-day free trial"
+            onClick={onOpenJoin || onOpenSignIn}
+            title="Join Prime – Watch movies, TV shows, sports, and live TV"
+            id="navbar-join-prime-btn"
           >
             Join Prime
           </button>
@@ -331,10 +328,11 @@ export default function PrimeNavbar({
                 className="pv-join-btn pv-join-btn--full"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  onOpenSignIn();
+                  if (onOpenJoin) onOpenJoin();
+                  else onOpenSignIn();
                 }}
               >
-                Join Prime – Start Free Trial
+                Join Prime – Watch Now
               </button>
               <button
                 type="button"

@@ -13,7 +13,7 @@ export default function PrimeFaq() {
     },
     {
       q: 'How much does Amazon Prime Video cost?',
-      a: 'You can enjoy Prime Video as part of an Amazon Prime membership. New subscribers can get started with a 30-day free trial. After the trial, membership plans start at ₹299 per month or ₹1,499 per year, with full access to Prime Video, Prime Shopping benefits, and Prime Music.',
+      a: 'You can enjoy Prime Video as part of an Amazon Prime membership. Membership plans start at ₹299 per month or ₹1,499 per year, with full access to Prime Video, Prime Shopping benefits, and Prime Music.',
     },
     {
       q: 'How many devices can stream Prime Video at the same time?',
