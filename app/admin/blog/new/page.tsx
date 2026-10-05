@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function NewBlogPostPage() {
   return (
     <main style={{ minHeight: '100vh', background: '#00050d', padding: '0 0 80px' }}>
