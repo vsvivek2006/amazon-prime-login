@@ -107,7 +107,7 @@ export function LoginForm() {
                 type="email"
                 required
                 autoComplete="email"
-                placeholder="admin@primevideo.internal"
+                placeholder="admin@primevideo.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 style={{

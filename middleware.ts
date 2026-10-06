@@ -3,51 +3,23 @@ import type { NextRequest } from 'next/server';
 
 const SESSION_COOKIE = 'pv_admin_session';
 
-async function verifyToken(token: string): Promise<boolean> {
-  const secret = process.env.SESSION_SECRET;
-  if (!secret) return false;
-
-  const lastDot = token.lastIndexOf('.');
-  if (lastDot === -1) return false;
-  const payload = token.slice(0, lastDot);
-  const sig = token.slice(lastDot + 1);
+async function verifyAdminToken(token: string): Promise<boolean> {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !anonKey || !token) return false;
 
   try {
-    const encoder = new TextEncoder();
-    const keyData = encoder.encode(secret);
-    
-    // Import the secret for HMAC SHA-256
-    const cryptoKey = await crypto.subtle.importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['verify']
-    );
+    const res = await fetch(`${url}/auth/v1/user`, {
+      headers: {
+        apikey: anonKey,
+        Authorization: `Bearer ${token}`,
+      },
+      signal: AbortSignal.timeout(4000),
+    });
 
-    // Convert hex string to Uint8Array
-    const sigBytes = new Uint8Array(sig.match(/.{1,2}/g)?.map(byte => parseInt(byte, 16)) || []);
-    const payloadBytes = encoder.encode(payload);
-
-    // Verify the signature
-    const isValid = await crypto.subtle.verify(
-      'HMAC',
-      cryptoKey,
-      sigBytes,
-      payloadBytes
-    );
-
-    if (!isValid) return false;
-
-    // Check expiry (base64url to JSON)
-    let b64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-    while (b64.length % 4) {
-      b64 += '=';
-    }
-    const decodedStr = atob(b64);
-    const decoded = JSON.parse(decodedStr);
-    
-    return decoded.exp && Date.now() < decoded.exp;
+    if (!res.ok) return false;
+    const user = await res.json();
+    return Boolean(user && user.app_metadata?.role === 'admin');
   } catch {
     return false;
   }
@@ -65,11 +37,17 @@ export async function middleware(request: NextRequest) {
   if (!pathname.startsWith('/admin')) return NextResponse.next();
 
   // Allow login page through
-  if (pathname === '/admin/login') return NextResponse.next();
+  if (pathname === '/admin/login') {
+    const token = request.cookies.get(SESSION_COOKIE)?.value;
+    if (token && (await verifyAdminToken(token))) {
+      return NextResponse.redirect(new URL('/admin/blog', request.url));
+    }
+    return NextResponse.next();
+  }
 
-  // Check session cookie
+  // Check session cookie for protected admin pages
   const token = request.cookies.get(SESSION_COOKIE)?.value;
-  if (!token || !(await verifyToken(token))) {
+  if (!token || !(await verifyAdminToken(token))) {
     const loginUrl = new URL('/admin/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);

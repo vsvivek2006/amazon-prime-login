@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { verifyPassword, createSession } from '@/lib/auth/session';
+import { createSession } from '@/lib/auth/session';
+import { createClient } from '@supabase/supabase-js';
 
 // Simple in-memory rate limiter: max 5 attempts per IP per 15 min
 const loginAttempts = new Map<string, { count: number; resetAt: number }>();
@@ -35,28 +36,48 @@ export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    const adminEmail = process.env.ADMIN_EMAIL;
-    if (!email || !password || !adminEmail) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Please enter both email and password.' }, { status: 400 });
     }
 
-    // Constant-time email comparison
-    const emailMatch = Buffer.from(email.toLowerCase().trim()).equals(
-      Buffer.from(adminEmail.toLowerCase().trim())
-    );
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!supabaseUrl || !anonKey) {
+      return NextResponse.json({ error: 'Supabase configuration missing.' }, { status: 500 });
+    }
 
-    const passwordMatch = await verifyPassword(password);
+    const supabase = createClient(supabaseUrl, anonKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
 
-    // Check both together to prevent timing-based email enumeration
-    if (!emailMatch || !passwordMatch) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+    // Authenticate directly with Supabase Auth
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
+    });
+
+    if (error || !data.user || !data.session) {
+      return NextResponse.json({ error: error?.message || 'Invalid login credentials' }, { status: 401 });
+    }
+
+    // Check administrator role
+    const role = data.user.app_metadata?.role;
+    if (role !== 'admin') {
+      return NextResponse.json(
+        { error: 'Access denied: Administrator privileges required.' },
+        { status: 403 }
+      );
     }
 
     resetRateLimit(ip);
-    await createSession();
+    await createSession(data.session.access_token);
 
-    return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ error: 'Login failed' }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      user: { email: data.user.email, role: 'admin' },
+    });
+  } catch (err) {
+    console.error('Admin login error:', err);
+    return NextResponse.json({ error: 'Login failed. Please try again.' }, { status: 500 });
   }
 }
